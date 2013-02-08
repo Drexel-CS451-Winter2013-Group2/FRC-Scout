@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>J_Security_Check</display-name>  
+  <welcome-file-list>  
+    <welcome-file>/login.jsp</welcome-file>  
+  </welcome-file-list>  
+  
+  <login-config>  
+    <auth-method>FORM</auth-method>  
+        <form-login-config>  
+            <form-login-page>/login.jsp</form-login-page>  
+            <form-error-page>/error.jsp</form-error-page>  
+        </form-login-config>  
+  </login-config>  
+    
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Wildcard means whole app requires authentication</web-resource-name>
+            <url-pattern>/*</url-pattern>
+            <http-method>GET</http-method>
+            <http-method>POST</http-method>
+        </web-resource-collection>
+
+        <auth-constraint>
+            <role-name>administrator</role-name>
+        </auth-constraint>
+    </security-constraint>
+    
+    <security-role>
+      <role-name>*</role-name>
+    </security-role>
+    
+</web-app>
