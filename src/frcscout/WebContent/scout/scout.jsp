@@ -1,5 +1,6 @@
 <%@ include file="../include/header.jsp" %>
+<script src="/frcscout/js/layout/scoutLayout.js"></script> 
 
-<a href="admin/addEvent.jsp">add event</a>
+manage scout data
 
 <%@ include file="../include/footer.jsp" %>

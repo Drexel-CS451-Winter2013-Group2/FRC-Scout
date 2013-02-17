@@ -6,7 +6,8 @@ Ext.onReady(function() {
             align: 'stretch'
         },
         defaults: {
-            border: 0
+            border: 0,
+            padding: 0
         },
         items:getToolbarLinks()
     });
@@ -17,18 +18,29 @@ function getToolbarLinks(){
         xtype: 'panel',
         html: '<h1>FRC Scout</h1>',
         baseCls: 'lay-title',
-        height: 70,
-        padding: 10
+        height: 70
     }, {
-        xtype: 'panel',
-        baseCls: 'lay-toolbar',
-        html: '<a href="#">View Data</a> | <a href="#">Manage My Scout Data </a> | <a href="#">System Administrator</a>',
+        layout: {
+            type: 'hbox',
+            align: 'stretch'
+        },
+        defaults: {
+            baseCls: 'lay-toolbar',
+            padding: 4
+        },
         height: 25,
-        padding: 3
+        items: [{
+            xtype: 'panel',
+            contentEl: 'links',
+            flex: 1
+        }, {
+            xtype: 'panel',
+            contentEl: 'logout'
+        }]
     },{
         xtype: 'panel',
         baseCls: 'lay-content',
-        contentEl:'content',
+        items: getContentItems(),
         flex: 1
-    }]
+    }];
 }

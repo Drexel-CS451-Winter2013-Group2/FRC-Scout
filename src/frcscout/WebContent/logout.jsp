@@ -1,4 +1,7 @@
 <%@ include file="../include/header.jsp" %>
-<script src="/frcscout/js/admin/addEvent.js"></script> 
+
+<% session.invalidate();
+  response.sendRedirect("/frcscout/");
+%>
 
 <%@ include file="../include/footer.jsp" %>

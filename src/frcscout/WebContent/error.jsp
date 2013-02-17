@@ -1,10 +1,10 @@
 <html>  
 <head>  
-<title>Error Page For Examples</title>  
+<title>Error</title>  
 </head>  
 <body>  
 <p>
-Sorry, login failed!
+You do not have access to this page.
 </p>  
 </body>  
 </html>

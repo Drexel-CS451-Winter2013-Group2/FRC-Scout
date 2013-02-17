@@ -2,21 +2,21 @@
 <html> 
 <head> 
 <meta http-equiv="Content-Type" content="text/html; charset=windows-1256"> 
-<title>Login Page</title> 
+<title>Login</title> 
 </head> 
 <body> 
 <form method="POST" action="j_security_check">
 <table>
     <tr>
-        <td colspan="2">Login to the Tomcat-Demo application:</td>
+        <td colspan="2">Login</td>
     </tr>
     <tr>
-        <td>Name:</td>
+        <td>E-mail Address:</td>
         <td><input type="text" name="j_username" /></td>
     </tr>
     <tr>
         <td>Password:</td>
-        <td><input type="password" name="j_password"/ ></td>
+        <td><input type="password" name="j_password"/></td>
     </tr>
     <tr>
         <td colspan="2"><input type="submit" value="Go" /></td>

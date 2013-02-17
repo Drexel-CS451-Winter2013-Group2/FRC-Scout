@@ -7,16 +7,46 @@
   
   <login-config>  
     <auth-method>FORM</auth-method>  
-        <form-login-config>  
-            <form-login-page>/login.jsp</form-login-page>  
-            <form-error-page>/error.jsp</form-error-page>  
-        </form-login-config>  
+    <form-login-config>  
+      <form-login-page>/login.jsp</form-login-page>  
+      <form-error-page>/loginError.jsp</form-error-page>  
+    </form-login-config>  
   </login-config>  
+  
+  <error-page>
+    <error-code>403</error-code>
+    <location>/error.jsp</location>
+  </error-page>
     
     <security-constraint>
         <web-resource-collection>
-            <web-resource-name>Wildcard means whole app requires authentication</web-resource-name>
+            <web-resource-name>Team_Member</web-resource-name>
             <url-pattern>/*</url-pattern>
+            <http-method>GET</http-method>
+            <http-method>POST</http-method>
+        </web-resource-collection>
+
+        <auth-constraint>
+            <role-name>team_member</role-name>
+        </auth-constraint>
+    </security-constraint>
+        <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Scout</web-resource-name>
+            <url-pattern>/scout/*</url-pattern>
+            <http-method>GET</http-method>
+            <http-method>POST</http-method>
+        </web-resource-collection>
+
+        <auth-constraint>
+            <role-name>scout</role-name>
+        </auth-constraint>
+        
+    </security-constraint>
+        <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Admin</web-resource-name>
+            <url-pattern>/admin/*</url-pattern>
             <http-method>GET</http-method>
             <http-method>POST</http-method>
         </web-resource-collection>
@@ -28,6 +58,12 @@
     
     <security-role>
       <role-name>administrator</role-name>
+    </security-role>
+        <security-role>
+      <role-name>scout</role-name>
+    </security-role>
+        <security-role>
+      <role-name>team_member</role-name>
     </security-role>
     
 </web-app>

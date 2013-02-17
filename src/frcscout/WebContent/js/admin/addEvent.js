@@ -1,8 +1,8 @@
-Ext.onReady(function() {
-    var formPanel = Ext.create('Ext.form.Panel', {
-        frame: true,
+function getContentItems(){
+    return [{
         title: 'Add Event',
         width: 340,
+        frame: true,
         bodyPadding: 5,
         url: 'insertEvent.jsp',
         standardSubmit: true,
@@ -43,6 +43,5 @@ Ext.onReady(function() {
                 this.up('form').getForm().reset();
             }
         }]
-    });
-    formPanel.render('addEvent');
-});
+    }];
+}
