@@ -39,7 +39,7 @@ MySQL:
 	Check Requirements: Execute if prompted, then click Next
 	Installation: Click Execute
 	Configuration: click next.  click next, defaults should be fine. (Make sure its port number: 3306)
-		root account passwords: pick whatever you want
+		root account passwords: pick whatever you want.  i just used user: root, password: first
 		Windows Server Config: uncheck "Start the MySql Server at System Startup" Click next
 	Click next, click finish
 
@@ -54,6 +54,25 @@ Tomcat 7:
 	Uncheck 'Run Apache Tomcat' and 'Show Readme'.  Click finish.
 
 Setup:
+
+Import MySQL Database:
+use the root account username and password you picked when installing MySQL (i used user: root, password: first on my machine)
+
+Using the MySQL workbench GUI:
+	create a new schema called 'frcscout'
+	double click schema to select it
+	open frcscout.sql
+	execute frcscout.sql
+	open addDBuser.sql
+	execute addDBuser.sql
+
+Using commands in cygwin: 
+	create MySQL database frcscout
+		mysqladmin -u $ROOT_USERNAME -p frcscout
+	run create sql script
+		cat $GITHUB_DIR/FRC-Scout/sql/frcscout.ql | mysql -u $ROOT_USERNAME -p frcscout
+	add DB User (this adds the authentication that the web app uses)
+		mysql -u $ROOT_USERNAME -p < $GITHUB_DIR/FRC-Scout/sql/addDBuser.sql
 
 Eclipse:
 Start Eclipse
