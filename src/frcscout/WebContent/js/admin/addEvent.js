@@ -1,6 +1,7 @@
 function getContentItems(){
     return [{
         title: 'Add Event',
+        xtype: 'form',
         width: 340,
         frame: true,
         bodyPadding: 5,
@@ -11,7 +12,6 @@ function getContentItems(){
             labelWidth: 90,
             anchor: '100%'
         },
-
         items: [{
             xtype: 'textfield',
             name: 'name',

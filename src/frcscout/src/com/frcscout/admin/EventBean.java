@@ -5,6 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 import com.frcscout.sql.DBConnection;
 import com.frcscout.sql.MySQLConnection;
 import com.frcscout.util.StringUtil;
@@ -56,6 +59,46 @@ public class EventBean {
                 System.out.println("Error closing query");
             }
         }
+    }
+    
+    public String loadEvents() {
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        JSONArray json = new JSONArray();
+        try {
+            conn = dbconn.getConnection();
+            st = conn.prepareStatement("SELECT * FROM events");
+            rs = st.executeQuery();
+            while (rs.next()) {
+                JSONObject o = new JSONObject();
+                if (rs.getDate("start_date") != null) 
+                o.put("id", rs.getInt("id"));
+                o.put("name", rs.getString("name"));
+                o.put("location", rs.getString("location"));
+                if (rs.getDate("start_date") != null) {
+                    o.put("start_date", rs.getDate("start_date").toString());
+                } else {
+                    o.put("start_date", "");
+                }
+                if (rs.getDate("end_date") != null){
+                    o.put("end_date", rs.getDate("end_date").toString());
+                } else {
+                    o.put("end_date", "");
+                }
+                json.add(o);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try{
+                conn.close();
+                st.close();
+                rs.close();
+            }catch (SQLException e) {
+                System.out.println("Error closing query");
+            }
+        }
+       return json.toString();
     }
     
     public void updateEvent() {
@@ -138,24 +181,32 @@ public class EventBean {
     public void setName(String name){
         if (!StringUtil.isBlank(name)) {
             this.name = name.trim();
+        } else {
+            this.name = null;
         }
     }
     
     public void setLocation(String location){
         if (!StringUtil.isBlank(location)) {
             this.location = location;
+        } else {
+            this.location = null;
         }
     }
     
     public void setStartDate(String startDate) {
         if (!StringUtil.isBlank(startDate)) {
             this.startDate = startDate;
+        } else {
+            this.startDate = null;
         }
     }
     
     public void setEndDate(String endDate) {
         if (!StringUtil.isBlank(endDate)) {
             this.endDate = endDate;
+        } else {
+            this.endDate = null;
         }
     }
     

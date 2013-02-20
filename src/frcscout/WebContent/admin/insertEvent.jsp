@@ -7,6 +7,6 @@
 <jsp:setProperty name="EventBean" property="endDate" value="${param.endDate}"/>
 <%EventBean.insertEvent();%> 
 
-<%response.sendRedirect("../admin.jsp"); %>
+<%response.sendRedirect("/frcscout/admin/admin.jsp?tab=2"); %>
 
 <%@ include file="../include/footer.jsp" %>

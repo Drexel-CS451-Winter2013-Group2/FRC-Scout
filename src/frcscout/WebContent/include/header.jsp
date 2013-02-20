@@ -6,6 +6,7 @@
 <link href="/frcscout/css/layout/layout.css" rel="stylesheet" type="text/css">
 <script src="/frcscout/js/lib/extjs/ext-all-debug-w-comments.js"></script>
 <script src="/frcscout/js/layout/layout.js"></script> 
+<script src="/frcscout/js/util/util.js"></script>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -13,7 +14,7 @@
 </head>
 <body>
 <div id="links">
-<a href="/frcscout/index.jsp">View Data</a>
+<a href="/frcscout/index.jsp">View Event Data</a>
 <c:if test="${pageContext.request.isUserInRole('scout')}">
      | <a href="/frcscout/scout/scout.jsp">Manage My Scout Data</a>
 </c:if>
