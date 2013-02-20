@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>J_Security_Check</display-name>  
+  <welcome-file-list>  
+    <welcome-file>/index.jsp</welcome-file>  
+  </welcome-file-list>  
+  
+  <login-config>  
+    <auth-method>FORM</auth-method>  
+    <form-login-config>  
+      <form-login-page>/login.jsp</form-login-page>  
+      <form-error-page>/loginError.jsp</form-error-page>  
+    </form-login-config>  
+  </login-config>  
+  
+  <error-page>
+    <error-code>403</error-code>
+    <location>/error.jsp</location>
+  </error-page>
+    
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Team_Member</web-resource-name>
+            <url-pattern>/*</url-pattern>
+            <http-method>GET</http-method>
+            <http-method>POST</http-method>
+        </web-resource-collection>
+
+        <auth-constraint>
+            <role-name>team_member</role-name>
+        </auth-constraint>
+    </security-constraint>
+        <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Scout</web-resource-name>
+            <url-pattern>/scout/*</url-pattern>
+            <http-method>GET</http-method>
+            <http-method>POST</http-method>
+        </web-resource-collection>
+
+        <auth-constraint>
+            <role-name>scout</role-name>
+        </auth-constraint>
+        
+    </security-constraint>
+        <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Admin</web-resource-name>
+            <url-pattern>/admin/*</url-pattern>
+            <http-method>GET</http-method>
+            <http-method>POST</http-method>
+        </web-resource-collection>
+
+        <auth-constraint>
+            <role-name>administrator</role-name>
+        </auth-constraint>
+    </security-constraint>
+    
+    <security-role>
+      <role-name>administrator</role-name>
+    </security-role>
+        <security-role>
+      <role-name>scout</role-name>
+    </security-role>
+        <security-role>
+      <role-name>team_member</role-name>
+    </security-role>
+    
+</web-app>

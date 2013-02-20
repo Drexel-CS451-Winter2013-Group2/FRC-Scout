@@ -1,0 +1,2 @@
+CREATE USER 'first' IDENTIFIED BY 'sc0ut';
+GRANT ALL PRIVILEGES ON *.* TO 'first';

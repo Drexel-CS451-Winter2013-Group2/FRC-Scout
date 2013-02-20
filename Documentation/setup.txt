@@ -1,0 +1,124 @@
+Download:
+
+MySQL 5.6:
+	www.mysql.com
+	Click "Downloads (GA) tab
+	Click "MySQL InStaller (Windows)" link on left side of window
+	Click "Download" for Windows (x86 32-bit), MSI Installer
+	Find tiny "No thanks, just start my download." link at the bottom of the page
+
+Tomcat 7:
+	tomcat.apache.org
+	Click "Tomcat 7.0" on the left side of the window, under the Download header
+	Click 32-bit/64-bit Windows Service Installer
+
+Eclipse (Juno):
+	www.eclipse.org
+	Click "Downloads"
+	Click "Eclipse IDE for Java EE Developers"
+	Click download arrow icon, or "Main Eclipse.org downloads area" link
+
+Java 7:
+	http://www.oracle.com/technetwork/java/javase/downloads/index.html
+	download JDK
+
+Install:
+
+MySQL:
+	Double-click installer
+	Click "Install MySQL Products'
+	License Info: Click accept checkbox and click next
+	Find latest products: Click skip updates checkbox and click next
+	Setup Type: Click "Custom" radio button and click next
+	Feature Selection: 
+		MySQL Server 5.6.1
+		Applications->MySQL Workbench CE 5.2 (Optional: this is a gui for altering the database)
+		MySQL Connectors->Connector/J 5.1.23
+		Documentation (Optional)
+		Click Next
+	Check Requirements: Execute if prompted, then click Next
+	Installation: Click Execute
+	Configuration: click next.  click next, defaults should be fine. (Make sure its port number: 3306)
+		root account passwords: pick whatever you want.  i just used user: root, password: first
+		Windows Server Config: uncheck "Start the MySql Server at System Startup" Click next
+	Click next, click finish
+
+Tomcat 7:
+	Double click installer
+	click next
+	click i agree
+	Uncheck components you don't want.  All but "Tomcat" are optional. click next
+	Config: Defaults should be fine.  Make sure HTTP/1.1 Connector Port is 8080. Click Next.
+	Java Virutal Machine: Change to ${JAVA_HOME} for jdk 1.7 (c:/program files/java/jdk1.7.0_13 for me)  Click next
+	Click install.
+	Uncheck 'Run Apache Tomcat' and 'Show Readme'.  Click finish.
+
+Setup:
+
+Import MySQL Database:
+use the root account username and password you picked when installing MySQL (i used user: root, password: first on my machine)
+
+Using the MySQL workbench GUI:
+	create a new schema called 'frcscout'
+	double click schema to select it
+	open frcscout.sql
+	execute frcscout.sql
+	open addDBuser.sql
+	execute addDBuser.sql
+
+Using commands in cygwin: 
+	create MySQL database frcscout
+		mysqladmin -u $ROOT_USERNAME -p frcscout
+	run create sql script
+		cat $GITHUB_DIR/FRC-Scout/sql/frcscout.ql | mysql -u $ROOT_USERNAME -p frcscout
+	add DB User (this adds the authentication that the web app uses)
+		mysql -u $ROOT_USERNAME -p < $GITHUB_DIR/FRC-Scout/sql/addDBuser.sql
+
+Eclipse:
+Start Eclipse
+	import project:
+		Pick a workspace and click OK
+		File->Import->General->Existing project into Workspace
+		Navigate to frcscout folder
+	click finish
+
+	add tomcat server:
+		find server tab at bottom of window
+		click 'new server wizard'
+		select 'apache->tomcat 7' and click next
+		browse for ${TOMCAT_HOME} (c:program files/apache software foundation/tomcat7) and click next
+		click finish (DON"T ADD FRCSCOUT)
+		
+		double click added server
+		on overview window:
+			Server Location: Change to "Use Tomcat Instillation"
+			click modules (bottom of tomcat page)
+			click 'add web module'
+			select frcscout and click ok
+			ctrl-s to save (or it will prompt you when you try to close the page)
+			
+		Server Project:
+			delete Tomcat v7.0 Server->server.xml
+			rightclick Tomcat folder->New->File
+			click "<< Advanced"
+			check "link to file in the file system"
+			browse for the server/server.xml file in the github directory
+
+	remove javascript from validation: (you only have to do this if eclipse flags extjs.js as having an error)
+		Project->Preferences->Javascript->Include Path->Source
+		expand web content
+		select excluded and click edit
+		add the js folder to the excluded list
+
+Other:
+copy mysql-connector-java-5.1.23.bin.jar (can be found in server/ directory in github) to ${TOMCATHOME}/lib
+
+
+Starting a service in Windows:  
+MySQL needs to be started in order for the program to run.  
+Tomcat7 can be started from Eclipse during development (which auto-publishes changes to the server)
+	start -> "Services"
+	select MySQL56 and click start.
+	the service can be stopped later by clicking stop.
+
+Website: localhost:8080/frcscout
