@@ -21,20 +21,24 @@ public class UserAccountBean {
         lastName = null;
     }
     
-    public void loadTeam(String email) { //select 1 users by email
+    public void loadUser(String email) { //select 1 users by email
         //TODO
     }
     
-    public String loadTeams() { // select all users, return JSON string
+    public String loadUsers() { // select all users, return JSON string
         //TODO
         return null;
     }
     
-    public void updateTeam() { // update entry in database
+    public void updateUser() { // update entry in database
         //TODO
     }
     
-    public void insertTeam(){ //create entry in database
+    public void insertUser(){ //create entry in database
+        //TODO
+    }
+    
+    public void deleteUser() { //delete entry from database
         //TODO
     }
     
