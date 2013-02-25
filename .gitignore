@@ -1,0 +1,6 @@
+src/frcscout/build
+*.class
+.metadata/*
+Servers/*
+src/frcscout/.*
+.DS_Store
