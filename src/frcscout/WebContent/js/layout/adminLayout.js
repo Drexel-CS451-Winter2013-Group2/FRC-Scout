@@ -149,12 +149,17 @@ function getEventItems() {
             }, {
                 text: 'edit',
                 handler: function() {
-                    alert('You clicked the button!');
+                    var a = Ext.getCmp('eventGrid').getSelectionModel().getSelection()[0].data.id;
+                    window.location="/frcscout/admin/editEvent.jsp?id=" + a;
                 }
             }, {
                 text: 'delete',
                 handler: function() {
-                    alert('You clicked the button!');
+                    var a = Ext.getCmp('eventGrid').getSelectionModel().getSelection()[0].data.id;
+                    Ext.MessageBox.confirm('Confirm', 'Are you sure you want to do that?', 
+                                function(btn) { 
+                                    if (btn == "yes") {
+                            window.location = "/frcscout/admin/deleteEvent.jsp?id=" + a;}});
                 }
             }]
         }, {
@@ -163,6 +168,7 @@ function getEventItems() {
             store: getEventStore(),
             id: 'eventGrid',
             columns: [
+                { dataIndex: 'id', dataIndex: 'id', hidden: true},
                 { header: 'Name',  dataIndex: 'name', flex: 1  },
                 { header: 'Location', dataIndex: 'location'},
                 { header: 'Start Date', dataIndex: 'start_date' },
