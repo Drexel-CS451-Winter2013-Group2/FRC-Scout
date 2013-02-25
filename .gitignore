@@ -3,4 +3,4 @@ src/frcscout/build
 .metadata/*
 Servers/*
 src/frcscout/.*
-
+.DS_Store
