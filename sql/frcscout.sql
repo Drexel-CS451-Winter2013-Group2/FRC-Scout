@@ -217,7 +217,7 @@ CREATE TABLE `user_roles` (
 
 LOCK TABLES `user_roles` WRITE;
 /*!40000 ALTER TABLE `user_roles` DISABLE KEYS */;
-INSERT INTO `user_roles` VALUES ('admin','administrator'),('test','administrator'),('admin','scout'),('test','scout'),('admin','team_member'),('test','team_member');
+INSERT INTO `user_roles` VALUES ('admin','administrator'),('admin','scout'),('scout','scout'),('admin','team_member'),('scout','team_member'),('team','team_member');
 /*!40000 ALTER TABLE `user_roles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -243,7 +243,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES ('admin','admin','admin','admin'),('test','test','test','test');
+INSERT INTO `users` VALUES ('admin','21232f297a57a5a743894a0e4a801fc3','admin','admin'),('scout','6b34d70bee747e7d6341ff9f03b318ae','scout','scout'),('team','f894427cc1c571f79da49605ef8b112f','team','team');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -256,4 +256,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-02-15 11:47:16
+-- Dump completed on 2013-02-25 16:01:58
