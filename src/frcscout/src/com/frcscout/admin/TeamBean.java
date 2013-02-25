@@ -37,6 +37,10 @@ public class TeamBean {
         //TODO
     }
     
+    public void deleteTeam() {
+        //TODO
+    }
+    
     public void setId(int id) {
         this.id = Integer.valueOf(id);
     }
