@@ -8,7 +8,7 @@
     
     function getUserStore() { //temp data generator
         store1 = Ext.create('Ext.data.JsonStore', {
-            fields: ['email', 'first_name', 'last_name'],
+            fields: ['id', 'email', 'first_name', 'last_name', 'role'],
             data: userJSON
         });
         return store1;
@@ -27,14 +27,26 @@ function getContentItems(){
         xtype: 'tabpanel',
         activeTab: parseInt(getURLParameter('tab')),
         tabPosition: 'top',
+        defaults: {
+            border: 0
+        },
         items: [{
             title: 'User Accounts',
+            defaults: {
+                border: 0
+            },
             items: getUserItems()
         },{
             title: 'Teams',
+            defaults: {
+                border: 0
+            },
             items: getTeamItems()
         },{
             title: 'Events',
+            defaults: {
+                border: 0
+            },
             items: getEventItems()
         }]
     }];
@@ -54,19 +66,24 @@ function getUserItems() {
             xtype: 'buttongroup',
             columns: 3,
             items: [{
-                text: 'add',
+                text: 'Add',
                 handler: function() {
-                    alert('You clicked the button!');
+                    window.location = "/frcscout/admin/addUser.jsp";
                 }
             }, {
-                text: 'edit',
+                text: 'Edit',
                 handler: function() {
-                    alert('You clicked the button!');
+                    var a = Ext.getCmp('userGrid').getSelectionModel().getSelection()[0].data.id;
+                    window.location="/frcscout/admin/editUser.jsp?id=" + a;
                 }
             }, {
-                text: 'delete',
+                text: 'Delete',
                 handler: function() {
-                    alert('You clicked the button!');
+                    var a = Ext.getCmp('userGrid').getSelectionModel().getSelection()[0].data.id;
+                    Ext.MessageBox.confirm('Confirm', 'Are you sure you want delete this user?<br> This action cannot be undone.', 
+                                function(btn) { 
+                                    if (btn == "yes") {
+                            window.location = "/frcscout/admin/deleteUser.jsp?id=" + a;}});
                 }
             }]
         }, {
@@ -75,9 +92,11 @@ function getUserItems() {
             id: 'userGrid',
             store: getUserStore(),
             columns: [
+                { dataIndex: 'id', hidden: true},
                 { header: 'Email',  dataIndex: 'email', flex: 1  },
                 { header: 'First Name', dataIndex: 'first_name'},
-                { header: 'Last Name', dataIndex: 'last_name' }
+                { header: 'Last Name', dataIndex: 'last_name' },
+                { header: 'Role', dataIndex: 'role'}
             ],
             height: 200,
             width: 400
@@ -98,19 +117,24 @@ function getTeamItems() {
             xtype: 'buttongroup',
             columns: 3,
             items: [{
-                text: 'add',
+                text: 'Add',
                 handler: function() {
-                    alert('You clicked the button!');
+                    window.location = "/frcscout/admin/addTeam.jsp";
                 }
             }, {
-                text: 'edit',
+                text: 'Edit',
                 handler: function() {
-                    alert('You clicked the button!');
+                    var a = Ext.getCmp('teamGrid').getSelectionModel().getSelection()[0].data.id;
+                    window.location="/frcscout/admin/editTeam.jsp?id=" + a;
                 }
             }, {
-                text: 'delete',
+                text: 'Delete',
                 handler: function() {
-                    alert('You clicked the button!');
+                    var a = Ext.getCmp('teamGrid').getSelectionModel().getSelection()[0].data.id;
+                    Ext.MessageBox.confirm('Confirm', 'Are you sure you want to do that?', 
+                                function(btn) { 
+                                    if (btn == "yes") {
+                            window.location = "/frcscout/admin/deleteTeam.jsp?id=" + a;}});
                 }
             }]
         }, {
@@ -142,18 +166,18 @@ function getEventItems() {
             xtype: 'buttongroup',
             columns: 3,
             items: [{
-                text: 'add',
+                text: 'Add',
                 handler: function() {
                     window.location = "/frcscout/admin/addEvent.jsp";
                 }
             }, {
-                text: 'edit',
+                text: 'Edit',
                 handler: function() {
                     var a = Ext.getCmp('eventGrid').getSelectionModel().getSelection()[0].data.id;
                     window.location="/frcscout/admin/editEvent.jsp?id=" + a;
                 }
             }, {
-                text: 'delete',
+                text: 'Delete',
                 handler: function() {
                     var a = Ext.getCmp('eventGrid').getSelectionModel().getSelection()[0].data.id;
                     Ext.MessageBox.confirm('Confirm', 'Are you sure you want to do that?', 
@@ -168,7 +192,7 @@ function getEventItems() {
             store: getEventStore(),
             id: 'eventGrid',
             columns: [
-                { dataIndex: 'id', dataIndex: 'id', hidden: true},
+                { dataIndex: 'id', hidden: true},
                 { header: 'Name',  dataIndex: 'name', flex: 1  },
                 { header: 'Location', dataIndex: 'location'},
                 { header: 'Start Date', dataIndex: 'start_date' },

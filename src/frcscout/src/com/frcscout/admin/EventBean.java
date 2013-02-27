@@ -63,6 +63,7 @@ public class EventBean {
         }
     }
     
+    @SuppressWarnings("unchecked")
     public String loadEvents() {
         PreparedStatement st = null;
         ResultSet rs = null;
@@ -73,8 +74,6 @@ public class EventBean {
             rs = st.executeQuery();
             while (rs.next()) {
                 JSONObject o = new JSONObject();
-                int x = 0;
-                x = rs.getInt("id");
                 o.put("id", rs.getInt("id"));
                 o.put("name", rs.getString("name"));
                 o.put("location", rs.getString("location"));
@@ -199,9 +198,8 @@ public class EventBean {
                 }
             }
         } else {
-            System.out.println("Unable to update event because id is null");
+            System.out.println("Unable to delete event because id is null");
         }
-
     }
     
     public void setId(int id) {
