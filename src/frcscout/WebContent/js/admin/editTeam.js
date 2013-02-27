@@ -18,8 +18,8 @@ function getContentItems(){
             value: getURLParameter("id")
         }, {
             xtype: 'textfield',
-            name: 'id',
-            value: id,
+            name: 'number',
+            value: getURLParameter("id"),
             fieldLabel: 'Team Number:',
             regex: /^[0-9]+$/,
             regexText:'Team number must be an integer',
@@ -34,8 +34,7 @@ function getContentItems(){
             xtype: 'textfield',
             name: 'location',
             value: loc,
-            fieldLabel: 'Location:',
-            allowBlank: false
+            fieldLabel: 'Location:'
         }],
         buttons: [{
             text: 'Save',

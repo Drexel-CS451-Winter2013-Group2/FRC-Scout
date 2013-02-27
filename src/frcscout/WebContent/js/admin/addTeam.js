@@ -26,8 +26,7 @@ function getContentItems(){
         }, {
             xtype: 'textfield',
             name: 'location',
-            fieldLabel: 'Location:',
-            allowBlank: false
+            fieldLabel: 'Location:'
         }],
         buttons: [{
             text: 'Save',

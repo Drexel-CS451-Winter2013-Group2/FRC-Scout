@@ -114,28 +114,27 @@ public class UserAccountBean {
     }
     
     public void updateUser() {
-        if (!StringUtil.isBlank(email)) {
+        if (id != null) {
             PreparedStatement st = null;
-            String q = "UPDATE users SET first_Name = ?, last_name = ? ";
+            String q = "UPDATE users SET email = ?, first_Name = ?, last_name = ? ";
             if (!StringUtil.isBlank(password)) {
-                q += "password = MD5(?),";
+                q += ",password = MD5(?)";
             }
-            q += "WHERE email = ?";
+            q += "WHERE id = ?";
             try {
                 conn = dbconn.getConnection();
                 conn.setAutoCommit(false);
                 st = conn.prepareStatement(q);
-                st.setString(1, this.firstName);
-                st.setString(2, this.lastName);
+                st.setString(1, this.email);
+                st.setString(2, this.firstName);
+                st.setString(3, this.lastName);
                 if (!StringUtil.isBlank(password)) {
-                    st.setString(3, this.password);
-                    st.setString(4, this.email);
+                    st.setString(4, this.password);
+                    st.setInt(5, this.id);
                 } else {
-                    st.setString(3, this.email);
+                    st.setInt(4, this.id);
                 }
                 st.executeUpdate();
-                deleteUserRoles(this.email, conn);
-                insertUserRoles(this.email, this.role, conn);
                 conn.commit();
             } catch (SQLException e) {
                 e.printStackTrace();

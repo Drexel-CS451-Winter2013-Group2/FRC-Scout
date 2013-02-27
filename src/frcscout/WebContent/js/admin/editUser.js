@@ -13,6 +13,10 @@ function getContentItems(){
             anchor: '100%'
         },
         items: [{
+            xtype: 'hiddenfield',
+            name: 'id',
+            value: getURLParameter("id")
+        },{
             xtype: 'textfield',
             name: 'email',
             value: email,

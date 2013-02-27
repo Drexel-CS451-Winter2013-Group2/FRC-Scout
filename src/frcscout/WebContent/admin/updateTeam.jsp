@@ -4,7 +4,7 @@
 <jsp:setProperty name="TeamBean" property="id" value="${param.id}"/>
 <jsp:setProperty name="TeamBean" property="name" value="${param.name}"/>
 <jsp:setProperty name="TeamBean" property="location" value="${param.location}"/>
-<%TeamBean.updateTeam();%> 
+<%TeamBean.updateTeam(request.getParameter("number"));%> 
 
 <%response.sendRedirect("/frcscout/admin/admin.jsp?tab=1"); %>
 

@@ -3,7 +3,6 @@
 <%TeamBean.loadTeam(request.getParameter("id"));%>
 
 <script>
-var id = "<%=TeamBean.getId() %>";
 var name = "<%=TeamBean.getName() %>";
 var loc = "<%=TeamBean.getLocation() %>";
 </script>

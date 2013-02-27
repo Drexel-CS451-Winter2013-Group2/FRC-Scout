@@ -1,6 +1,7 @@
 <%@ include file="../include/header.jsp" %>
 
 <jsp:useBean id="UserAccountBean" class="com.frcscout.admin.UserAccountBean" scope="page"/>
+<jsp:setProperty name="UserAccountBean" property="id" value="${param.id}"/>
 <jsp:setProperty name="UserAccountBean" property="email" value="${param.email}"/>
 <jsp:setProperty name="UserAccountBean" property="password" value="${param.password}"/>
 <jsp:setProperty name="UserAccountBean" property="firstName" value="${param.firstName}"/>

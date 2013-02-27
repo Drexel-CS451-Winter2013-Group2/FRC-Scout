@@ -80,7 +80,7 @@ function getUserItems() {
                 text: 'Delete',
                 handler: function() {
                     var a = Ext.getCmp('userGrid').getSelectionModel().getSelection()[0].data.id;
-                    Ext.MessageBox.confirm('Confirm', 'Are you sure you want delete this user?<br> This action cannot be undone.', 
+                    Ext.MessageBox.confirm('Confirm', 'Are you sure you want delete this user?', 
                                 function(btn) { 
                                     if (btn == "yes") {
                             window.location = "/frcscout/admin/deleteUser.jsp?id=" + a;}});
@@ -131,7 +131,7 @@ function getTeamItems() {
                 text: 'Delete',
                 handler: function() {
                     var a = Ext.getCmp('teamGrid').getSelectionModel().getSelection()[0].data.id;
-                    Ext.MessageBox.confirm('Confirm', 'Are you sure you want to do that?', 
+                    Ext.MessageBox.confirm('Confirm', 'Are you sure you want to do delete this team? <br> The team can only be deleted if there are no match records for this team.', 
                                 function(btn) { 
                                     if (btn == "yes") {
                             window.location = "/frcscout/admin/deleteTeam.jsp?id=" + a;}});
@@ -180,7 +180,7 @@ function getEventItems() {
                 text: 'Delete',
                 handler: function() {
                     var a = Ext.getCmp('eventGrid').getSelectionModel().getSelection()[0].data.id;
-                    Ext.MessageBox.confirm('Confirm', 'Are you sure you want to do that?', 
+                    Ext.MessageBox.confirm('Confirm', 'Are you sure you want to do delete this event? <br> The event can only be deleted if there are no matches for this event.', 
                                 function(btn) { 
                                     if (btn == "yes") {
                             window.location = "/frcscout/admin/deleteEvent.jsp?id=" + a;}});

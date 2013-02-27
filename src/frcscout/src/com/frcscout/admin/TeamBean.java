@@ -85,17 +85,18 @@ public class TeamBean {
        return json.toString();
     }
     
-    public void updateTeam() {
+    public void updateTeam(String newId) {
         if (id != null) {
             PreparedStatement st = null;
-            String q = "UPDATE team SET name = ?, location = ? WHERE id = ?";
+            String q = "UPDATE team SET id = ?, name = ?, location = ? WHERE id = ?";
 
             try {
                 conn = dbconn.getConnection();
                 st = conn.prepareStatement(q);
-                st.setString(1, this.name);
-                st.setString(2, this.location);
-                st.setInt(3, this.id.intValue());
+                st.setInt(1, Integer.valueOf(newId));
+                st.setString(2, this.name);
+                st.setString(3, this.location);
+                st.setInt(4, this.id.intValue());
                 st.executeUpdate();
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -175,7 +176,7 @@ public class TeamBean {
         if (!StringUtil.isBlank(location)) {
             this.location = location;
         } else {
-            this.name = null;
+            this.location = null;
         }
     }
     

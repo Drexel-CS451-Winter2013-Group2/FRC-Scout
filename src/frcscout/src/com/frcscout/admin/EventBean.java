@@ -44,8 +44,12 @@ public class EventBean {
                     setId(rs.getInt("id"));
                     setName(rs.getString("name"));
                     setLocation(rs.getString("location"));
-                    this.startDate = rs.getDate("start_date").toString();
-                    this.endDate = rs.getDate("end_date").toString();
+                    if (rs.getDate("start_date") != null) {
+                        this.startDate = rs.getDate("start_date").toString();
+                    }
+                    if (rs.getDate("end_date") != null) {
+                        this.endDate = rs.getDate("end_date").toString();
+                    }
                 } else {
                     System.out.println("event id " + this.id.toString() + " not found");
                 }
