@@ -20,10 +20,17 @@ public class TeamBean {
     private DBConnection dbconn;
     
     public TeamBean() {
-        dbconn = new MySQLConnection();
-        id = null;
-        name = null;
-        location = null;
+        this.dbconn = new MySQLConnection();
+        this.id = null;
+        this.name = null;
+        this.location = null;
+    }
+    
+    public TeamBean(DBConnection dbconn) {
+        this.dbconn = dbconn;
+        this.id = null;
+        this.name = null;
+        this.location = null;
     }
     
     public void loadTeam(String id) {
