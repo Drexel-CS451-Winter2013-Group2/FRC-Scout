@@ -40,6 +40,8 @@ function getToolbarLinks(){
     },{
         xtype: 'panel',
         baseCls: 'lay-content',
+        overflowX: 'auto',
+        overflowY: 'auto',
         items: getContentItems(),
         flex: 1
     }];

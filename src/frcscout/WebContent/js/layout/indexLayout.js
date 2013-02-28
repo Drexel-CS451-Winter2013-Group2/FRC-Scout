@@ -7,27 +7,41 @@
     }
 
 function getContentItems(){
-    return [{
-    	xtype: 'combobox',
-    	fieldLabel: 'Select Event',
-    	store: getEventStore(),
-    	queryMode: 'local',
-    	displayField: 'name',
-    	valueField: 'id',
-    	padding: 5
-    }, {
+	return [{
         xtype: 'tabpanel',
         activeTab: 0,
         tabPosition: 'top',
+        overflowY: 'auto',
+        overflowX: 'auto',
+        minWidth: 800,
         items: [{
-            title: 'Overview',
-            items: getOverviewItems()
+            title: 'Group By Event',
+            padding: 10,
+            items: [{
+            	xtype: 'combobox',
+            	fieldLabel: 'Select Event',
+            	store: getEventStore(),
+            	queryMode: 'local',
+            	displayField: 'name',
+            	valueField: 'id'
+            }, {
+                xtype: 'tabpanel',
+                activeTab: 0,
+                tabPosition: 'top',
+                items: [{
+                    title: 'Overview',
+                    items: getOverviewItems()
+                },{
+                    title: 'View Match',
+                    items: getViewMatchItems()
+                },{
+                    title: 'View Team',
+                    items: getViewTeamItems()
+                }]
+            }]
         },{
-            title: 'View Match',
-            items: getViewMatchItems()
-        },{
-            title: 'View Team',
-            items: getViewTeamItems()
+            title: 'Group By Team',
+            html: '// TODO'
         }]
     }];
 }
@@ -78,7 +92,7 @@ function getOverviewItems() {
     		}
     	}],
     	width: 300,
-    	height: 400
+    	minHeight: 300
     };
 	
 	overviewChart.store.sort([{property: 'total_points', direction: 'ASC'}]);
@@ -101,7 +115,7 @@ function getOverviewItems() {
                 { header: 'Climb Points', dataIndex: 'climb'},
             ],
             height: 400,
-            width: 600
+            width: 500
         }, overviewChart]
 	}];
 }
@@ -300,8 +314,9 @@ function getViewTeamItems() {
 			}, {
 				xtype: 'chart',
 				animate: true,
-				width: 300,
-				height: 300,
+				margin: '50',
+				width: 200,
+				height: 200,
 				store: getTeamPieChartStore(),
 				series: [{
 					type: 'pie',
