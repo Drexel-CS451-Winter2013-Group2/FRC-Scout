@@ -1,11 +1,11 @@
 function getContentItems(){
     return [{
-        title: 'Add Event',
+        title: 'Edit Event',
         xtype: 'form',
         width: 340,
         frame: true,
         bodyPadding: 5,
-        url: 'insertEvent.jsp',
+        url: 'updateEvent.jsp',
         standardSubmit: true,
         fieldDefaults: {
             labelAlign: 'left',
@@ -13,22 +13,30 @@ function getContentItems(){
             anchor: '100%'
         },
         items: [{
+            xtype: 'hiddenfield',
+            name: 'id',
+            value: getURLParameter("id")
+        }, {
             xtype: 'textfield',
             name: 'name',
+            value: name,
             fieldLabel: 'Name:',
             allowBlank: false
         }, {
             xtype: 'textfield',
             name: 'location',
+            value: loc,
             fieldLabel: 'Location:',
             allowBlank: false
         }, {
             xtype: 'datefield',
             name: 'startDate',
+            value: startDate,
             fieldLabel: 'Start Date:'
         }, {
             xtype: 'datefield',
             name: 'endDate',
+            value: endDate,
             fieldLabel: 'End Date:'
         }],
         buttons: [{
