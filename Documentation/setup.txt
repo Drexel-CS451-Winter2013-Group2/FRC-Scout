@@ -78,8 +78,9 @@ Eclipse:
 Start Eclipse
 	import project:
 		Pick a workspace and click OK
-		File->Import->General->Existing project into Workspace
-		Navigate to frcscout folder
+		Create a new Dynamic Web Project
+		Right click 'src' folder, import->exising file system.  select src/frcscout/src
+		Right click 'frcscout' project, import->existing files system.  select src/frcscout.  expand the folder and only check test and WebContent.
 	click finish
 
 	add tomcat server:

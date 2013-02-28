@@ -206,8 +206,8 @@ CREATE TABLE `user_roles` (
   PRIMARY KEY (`email`,`roles`),
   KEY `FK_email_idx` (`email`),
   KEY `FK_roles_idx` (`roles`),
-  CONSTRAINT `FK_email` FOREIGN KEY (`email`) REFERENCES `users` (`email`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK_roles` FOREIGN KEY (`roles`) REFERENCES `roles` (`name`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `FK_email` FOREIGN KEY (`email`) REFERENCES `users` (`email`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_roles` FOREIGN KEY (`roles`) REFERENCES `roles` (`name`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -230,10 +230,13 @@ DROP TABLE IF EXISTS `users`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `users` (
   `email` varchar(254) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `password` varchar(254) NOT NULL,
   `first_name` varchar(50) DEFAULT NULL,
   `last_name` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`email`)
+  `active` tinyint(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`email`),
+  UNIQUE KEY `id_UNIQUE` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -243,7 +246,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES ('admin','21232f297a57a5a743894a0e4a801fc3','admin','admin'),('scout','6b34d70bee747e7d6341ff9f03b318ae','scout','scout'),('team','f894427cc1c571f79da49605ef8b112f','team','team');
+INSERT INTO `users` VALUES ('admin',1,'21232f297a57a5a743894a0e4a801fc3','admin','admin',1),('scout',2,'6b34d70bee747e7d6341ff9f03b318ae','scout','scout',1),('team',3,'f894427cc1c571f79da49605ef8b112f','team','team',1);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -256,4 +259,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-02-25 16:01:58
+-- Dump completed on 2013-02-27 14:11:34

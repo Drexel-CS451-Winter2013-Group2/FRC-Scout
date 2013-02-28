@@ -32,35 +32,42 @@ public class EventBean {
         conn = null;
     }
     
-    public void loadEvent(int id) {
-        PreparedStatement st = null;
-        ResultSet rs = null;
-        try {
-            conn = dbconn.getConnection();
-            st = conn.prepareStatement("SELECT 1 FROM events WHERE id = " + Integer.toString(id));
-            rs = st.executeQuery();
-            if (rs.next()) {
-                setId(rs.getInt("id"));
-                setName(rs.getString("name"));
-                setLocation(rs.getString("location"));
-                this.startDate = rs.getDate("start_date").toString();
-                this.endDate = rs.getDate("end_date").toString();
-            } else {
-                System.out.println("event id " + this.id.toString() + " not found");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try{
-                conn.close();
-                st.close();
-                rs.close();
-            }catch (SQLException e) {
-                System.out.println("Error closing query");
+    public void loadEvent(String id) {
+        if (!StringUtil.isBlank(id)) {
+            PreparedStatement st = null;
+            ResultSet rs = null;
+            try {
+                conn = dbconn.getConnection();
+                st = conn.prepareStatement("SELECT * FROM events WHERE id = " + id + " limit 1");
+                rs = st.executeQuery();
+                if (rs.next()) {
+                    setId(rs.getInt("id"));
+                    setName(rs.getString("name"));
+                    setLocation(rs.getString("location"));
+                    if (rs.getDate("start_date") != null) {
+                        this.startDate = rs.getDate("start_date").toString();
+                    }
+                    if (rs.getDate("end_date") != null) {
+                        this.endDate = rs.getDate("end_date").toString();
+                    }
+                } else {
+                    System.out.println("event id " + this.id.toString() + " not found");
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                try{
+                    conn.close();
+                    st.close();
+                    rs.close();
+                }catch (SQLException e) {
+                    System.out.println("Error closing query");
+                }
             }
         }
     }
     
+    @SuppressWarnings("unchecked")
     public String loadEvents() {
         PreparedStatement st = null;
         ResultSet rs = null;
@@ -71,7 +78,6 @@ public class EventBean {
             rs = st.executeQuery();
             while (rs.next()) {
                 JSONObject o = new JSONObject();
-                if (rs.getDate("start_date") != null) 
                 o.put("id", rs.getInt("id"));
                 o.put("name", rs.getString("name"));
                 o.put("location", rs.getString("location"));
@@ -105,7 +111,7 @@ public class EventBean {
         if (id != null) {
             PreparedStatement st = null;
             String q = "UPDATE events SET name = ?, location = ?, start_date = ?, end_date = ? WHERE id = ?";
-            
+
             try {
                 java.sql.Date sd = null;
                 java.sql.Date ed = null;
@@ -122,6 +128,7 @@ public class EventBean {
                 st.setDate(3, sd);
                 st.setDate(4, ed);
                 st.setInt(5, this.id.intValue());
+                st.executeUpdate();
             } catch (SQLException e) {
                 e.printStackTrace();
             } finally {
@@ -171,6 +178,31 @@ public class EventBean {
             } catch (SQLException e) {
                 System.out.println("Unable to close connection");
             }
+        }
+    }
+    
+    public void deleteEvent() {
+        if (id != null) {
+            PreparedStatement st = null;
+            String q = "DELETE FROM events WHERE id = ?";
+
+            try {
+                conn = dbconn.getConnection();
+                st = conn.prepareStatement(q);
+                st.setInt(1, this.id.intValue());
+                st.executeUpdate();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    conn.close();
+                    st.close();
+                } catch (SQLException e) {
+                    System.out.println("Unable to close connection");
+                }
+            }
+        } else {
+            System.out.println("Unable to delete event because id is null");
         }
     }
     
