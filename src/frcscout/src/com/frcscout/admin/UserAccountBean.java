@@ -135,6 +135,8 @@ public class UserAccountBean {
                     st.setInt(4, this.id);
                 }
                 st.executeUpdate();
+                deleteUserRoles(email, conn);
+                insertUserRoles(email, role, conn);
                 conn.commit();
             } catch (SQLException e) {
                 e.printStackTrace();
