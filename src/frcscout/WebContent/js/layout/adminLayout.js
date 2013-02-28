@@ -80,10 +80,15 @@ function getUserItems() {
                 text: 'Delete',
                 handler: function() {
                     var a = Ext.getCmp('userGrid').getSelectionModel().getSelection()[0].data.id;
-                    Ext.MessageBox.confirm('Confirm', 'Are you sure you want delete this user?', 
+                    var email = Ext.getCmp('userGrid').getSelectionModel().getSelection()[0].data.email;
+                    if (email == currentUser) {
+                        Ext.MessageBox.alert('Error', 'You cannot delete your own account.');
+                    } else {
+                        Ext.MessageBox.confirm('Confirm', 'Are you sure you want delete this user?', 
                                 function(btn) { 
                                     if (btn == "yes") {
                             window.location = "/frcscout/admin/deleteUser.jsp?id=" + a;}});
+                    }
                 }
             }]
         }, {
