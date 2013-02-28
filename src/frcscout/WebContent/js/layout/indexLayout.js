@@ -24,11 +24,9 @@ function getContentItems(){
             items: getOverviewItems()
         },{
             title: 'View Match',
-            html: '<p> tab2 </p>',
             items: getViewMatchItems()
         },{
             title: 'View Team',
-            html: '<p> tab3 </p>',
             items: getViewTeamItems()
         }]
     }];
@@ -92,7 +90,7 @@ function getOverviewItems() {
         },
         items: [{
         	xtype: 'gridpanel',
-            title: '[Event Name] Overview',
+        	title: '[Event Name] Overview',
             id: 'eventOverviewGrid',
             store: getOverviewStore(),
             columns: [
