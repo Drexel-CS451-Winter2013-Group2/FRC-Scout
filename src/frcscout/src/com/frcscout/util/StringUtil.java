@@ -21,9 +21,9 @@ public final class StringUtil {
     
     public static Date stringToDate(String s) {
         Date d = null;
-        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
         try {
-            d = df.parse(s);
+            d = (Date) df.parse(s);
         } catch (ParseException e) {
             System.out.println("Unable to parse date " + s);
         }
