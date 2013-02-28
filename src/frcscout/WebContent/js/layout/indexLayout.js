@@ -1,5 +1,21 @@
+	function getEventStore() { //temp data generator
+        store1 = Ext.create('Ext.data.JsonStore', {
+            fields: ['id', 'name', 'location', 'start_date', 'end_date'],
+            data: eventJSON
+        });
+        return store1;
+    }
+
 function getContentItems(){
     return [{
+    	xtype: 'combobox',
+    	fieldLabel: 'Select Event',
+    	store: getEventStore(),
+    	queryMode: 'local',
+    	displayField: 'name',
+    	valueField: 'id',
+    	padding: 5
+    }, {
         xtype: 'tabpanel',
         activeTab: 0,
         tabPosition: 'top',
