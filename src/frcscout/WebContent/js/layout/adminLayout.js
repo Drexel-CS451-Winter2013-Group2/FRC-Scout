@@ -93,7 +93,7 @@ function getUserItems() {
             }]
         }, {
             xtype: 'gridpanel',
-            title: 'Example',
+            title: 'Users',
             id: 'userGrid',
             store: getUserStore(),
             columns: [
@@ -144,7 +144,7 @@ function getTeamItems() {
             }]
         }, {
             xtype: 'gridpanel',
-            title: 'Example',
+            title: 'Teams',
             id: 'teamGrid',
             store: getTeamStore(),
             columns: [
@@ -193,7 +193,7 @@ function getEventItems() {
             }]
         }, {
             xtype: 'gridpanel',
-            title: 'Example',
+            title: 'Events',
             store: getEventStore(),
             id: 'eventGrid',
             columns: [
