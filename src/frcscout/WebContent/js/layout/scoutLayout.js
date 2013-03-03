@@ -62,11 +62,11 @@ function getContentItems(){
                 { header: 'Match Id', dataIndex: 'match_id' },
                 { header: 'Color', dataIndex: 'color'},
                 { header: 'Auton Top', dataIndex: 'auton_top'},
-                { header: 'Auton Mid.', dataIndex: 'auton_middle'},
-                { header: 'Auton Bot.', dataIndex: 'auton_bottom'},
+                { header: 'Auton Middle', dataIndex: 'auton_middle'},
+                { header: 'Auton Bottom', dataIndex: 'auton_bottom'},
                 { header: 'Teleop Top', dataIndex: 'teleop_top'},
-                { header: 'Teleop Mid.', dataIndex: 'teleop_middle'},
-                { header: 'Teleop Bot.', dataIndex: 'teleop_bottom'},
+                { header: 'Teleop Middle', dataIndex: 'teleop_middle'},
+                { header: 'Teleop Bottom', dataIndex: 'teleop_bottom'},
                 { header: 'Teleop Pyramid', dataIndex: 'teleop_pyramid'},
                 { header: 'Pyramid Level', dataIndex: 'pyramid_level'},
                 { header: 'Play Style', dataIndex: 'play_style'},
@@ -74,8 +74,8 @@ function getContentItems(){
                 { header: 'Ability', dataIndex: 'ability'},
                 { header: 'Fouls', dataIndex: 'fouls'},
                 { header: 'Techincal Fouls', dataIndex: 'technical_fouls'},
-                { header: 'Comments', dataIndex: 'comments'},
-                { header: 'Path', dataIndex: 'path'}
+                { header: 'Comments', dataIndex: 'comments', hidden: true},
+                { header: 'Path', dataIndex: 'path', hidden: true}
                 
             ],
             height: 200,
