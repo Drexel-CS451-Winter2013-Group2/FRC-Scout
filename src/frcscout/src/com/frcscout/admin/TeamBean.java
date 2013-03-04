@@ -181,7 +181,11 @@ public class TeamBean {
     }
     
     public int getId() {
-        return this.id.intValue();
+        if (id != null) {
+            return this.id.intValue();
+        } else {
+            return -1;
+        }
     }
     
     public String getName(){
