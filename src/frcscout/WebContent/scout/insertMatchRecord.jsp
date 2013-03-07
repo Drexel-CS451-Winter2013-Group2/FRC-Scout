@@ -3,6 +3,7 @@
 <jsp:useBean id="MatchRecordBean" class="com.frcscout.scout.MatchRecordBean" scope="page"/>
 <jsp:setProperty name="MatchRecordBean" property="user" value="<%=request.getRemoteUser()%>"/>
 <jsp:setProperty name="MatchRecordBean" property="teamId" value="${param.teamId}"/>
+<jsp:setProperty name="MatchRecordBean" property="eventId" value="${param.eventId}"/>
 <jsp:setProperty name="MatchRecordBean" property="matchId" value="${param.matchId}"/>
 <jsp:setProperty name="MatchRecordBean" property="color" value="${param.color}"/>
 <jsp:setProperty name="MatchRecordBean" property="autonTop" value="${param.autonTop}"/>

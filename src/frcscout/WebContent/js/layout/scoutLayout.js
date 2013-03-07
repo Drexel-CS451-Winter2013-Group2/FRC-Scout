@@ -1,6 +1,6 @@
 function getMatchRecordStore() { //temp data generator
         store1 = Ext.create('Ext.data.JsonStore', {
-            fields: ['id', 'user', 'team_id', 'match_id', 'color', 'auton_top',
+            fields: ['id', 'user', 'team_id', 'match_id', 'event_id', 'color', 'auton_top',
                      'auton_middle', 'auton_bottom', 'teleop_top', 'teleop_middle',
                      'teleop_bottom', 'teleop_pyramid', 'pyramid_level', 'play_style',
                      'confidence', 'ability', 'fouls', 'technical_fouls', 'comments', 'path'],
@@ -59,7 +59,8 @@ function getContentItems(){
                 { dataIndex: 'id', hidden: true},
                 { header: 'User',  dataIndex: 'user', flex: 1  },
                 { header: 'Team', dataIndex: 'team_id'},
-                { header: 'Match Id', dataIndex: 'match_id' },
+                { header: 'Match Number', dataIndex: 'match_id' },
+                { header: 'Event Id', dataIndex: 'event_id' },
                 { header: 'Color', dataIndex: 'color'},
                 { header: 'Auton Top', dataIndex: 'auton_top'},
                 { header: 'Auton Middle', dataIndex: 'auton_middle'},
