@@ -102,13 +102,13 @@ function getContentItems(){
             xtype: 'radiogroup',
             fieldLabel: 'Pyramid Level',
             items: [{
-                boxLabel: '1', name: 'pyramidLevel', inputValue: '0', checked: true
+                boxLabel: '0', name: 'pyramidLevel', inputValue: '0', checked: true
             }, {
-                boxLabel: '2', name: 'pyramidLevel', inputValue: '1'
+                boxLabel: '1', name: 'pyramidLevel', inputValue: '1'
             }, {
-                boxLabel: '3', name: 'pyramidLevel', inputValue: '2'
+                boxLabel: '2', name: 'pyramidLevel', inputValue: '2'
             }, {
-                boxLabel: '4', name: 'pyramidLevel', inputValue: '3'
+                boxLabel: '3', name: 'pyramidLevel', inputValue: '3'
             }]
         },{
             xtype: 'radiogroup', 
@@ -121,14 +121,14 @@ function getContentItems(){
         },{
             xtype: 'numberfield', 
             name: 'confidence',
-            fieldLabel: 'Confidence (0 - 10):',
+            fieldLabel: 'Rating (0 - 10):',
             value: 0,
             maxValue: 10,
             minValue: 0
         },{
             xtype: 'numberfield', 
             name: 'ability',
-            fieldLabel: 'Ability (0 - 10):',
+            fieldLabel: 'Floor Pickup Ability (0 - 10):',
             value: 0,
             maxValue: 10,
             minValue: 0
