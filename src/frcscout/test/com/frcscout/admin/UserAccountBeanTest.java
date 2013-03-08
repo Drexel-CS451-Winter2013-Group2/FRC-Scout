@@ -1,10 +1,12 @@
-package test.com.frcscout.admin;
+package com.frcscout.admin;
 
 import java.sql.Connection;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
+import org.junit.Test;
 
 import com.frcscout.admin.UserAccountBean;
 import com.frcscout.sql.DBConnection;
@@ -17,9 +19,10 @@ import static org.junit.Assert.fail;
 
 public class UserAccountBeanTest {
 
+    @Test
     public void loadUser()
     {
-    	Connection conn = null;
+        Connection conn = null;
         Statement st = null;
         ResultSet rs = null;
         String id = "testID";
@@ -28,7 +31,7 @@ public class UserAccountBeanTest {
         String testEmail = "test123@gmail.com";
         String testPassword = "testing123";
         try {
-        	DBConnection dbconn = new TestMySQLConnection();
+            DBConnection dbconn = new TestMySQLConnection();
             conn = ManageTestMySQLDatabase.createConnection();
             assertTrue(ManageTestMySQLDatabase.createDatabase(conn));
             st = conn.createStatement();
@@ -59,9 +62,10 @@ public class UserAccountBeanTest {
         }
     }
 
+    @Test
     public void loadUsers()
     {
-    	Connection conn = null;
+        Connection conn = null;
         Statement st = null;
         ResultSet rs = null;
         String testFirst = "testFirst";
@@ -69,7 +73,7 @@ public class UserAccountBeanTest {
         String testEmail = "test123@gmail.com";
         String testPassword = "testing123";
         try {
-        	DBConnection dbconn = new TestMySQLConnection();
+            DBConnection dbconn = new TestMySQLConnection();
             conn = ManageTestMySQLDatabase.createConnection();
             assertTrue(ManageTestMySQLDatabase.createDatabase(conn));
             st = conn.createStatement();
@@ -102,9 +106,10 @@ public class UserAccountBeanTest {
         }
     }
     
+    @Test
     public void updateUser()
     {
-    	Connection conn = null;
+        Connection conn = null;
         Statement st = null;
         ResultSet rs = null;
         String testFirst = "testFirst";
@@ -154,9 +159,10 @@ public class UserAccountBeanTest {
         }
     }
     
+    @Test
     public void insertUser()
     {
-    	 Connection conn = null;
+         Connection conn = null;
          Statement st = null;
          ResultSet rs = null;
          String testFirst = "testFirst";
@@ -198,9 +204,10 @@ public class UserAccountBeanTest {
          }
     }
     
+    @Test
     public void deleteUser()
     {
-    	Connection conn = null;
+        Connection conn = null;
         Statement st = null;
         ResultSet rs = null;
         String testFirst = "testFirst";

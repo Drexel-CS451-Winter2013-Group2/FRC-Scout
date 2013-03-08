@@ -1,14 +1,9 @@
-package test.com.frcscout.sql;
-
+package com.frcscout.sql;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 import org.junit.Test;
-
-import com.frcscout.sql.DBConnection;
-import com.frcscout.sql.ManageTestMySQLDatabase;
-import com.frcscout.sql.TestMySQLConnection;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;

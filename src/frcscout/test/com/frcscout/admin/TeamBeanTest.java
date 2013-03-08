@@ -1,9 +1,11 @@
-package test.com.frcscout.admin;
+package com.frcscout.admin;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
+import org.junit.Test;
 
 import com.frcscout.admin.TeamBean;
 import com.frcscout.sql.DBConnection;
@@ -15,17 +17,18 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 public class TeamBeanTest {
-
+    
+    @Test
     public void loadTeam()
     {
-    	Connection conn = null;
+        Connection conn = null;
         Statement st = null;
         ResultSet rs = null;
         String id = "testID";
         String testName = "testName";
         String testLocation = "testLocation";
         try {
-        	DBConnection dbconn = new TestMySQLConnection();
+            DBConnection dbconn = new TestMySQLConnection();
             conn = ManageTestMySQLDatabase.createConnection();
             assertTrue(ManageTestMySQLDatabase.createDatabase(conn));
             st = conn.createStatement();
@@ -51,16 +54,17 @@ public class TeamBeanTest {
             }
         }
     }
-
+    
+    @Test
     public void loadTeams()
     {
-    	Connection conn = null;
+        Connection conn = null;
         Statement st = null;
         ResultSet rs = null;
         String testName = "testName";
         String testLocation = "testLocation";
         try {
-        	DBConnection dbconn = new TestMySQLConnection();
+            DBConnection dbconn = new TestMySQLConnection();
             conn = ManageTestMySQLDatabase.createConnection();
             assertTrue(ManageTestMySQLDatabase.createDatabase(conn));
             st = conn.createStatement();
@@ -89,9 +93,10 @@ public class TeamBeanTest {
         }
     }
     
+    @Test
     public void updateTeam()
     {
-    	Connection conn = null;
+        Connection conn = null;
         Statement st = null;
         ResultSet rs = null;
         String expectedName = "testname";
@@ -131,9 +136,10 @@ public class TeamBeanTest {
         }
     }
     
+    @Test
     public void insertTeam()
     {
-    	Connection conn = null;
+        Connection conn = null;
         Statement st = null;
         ResultSet rs = null;
         String expectedName = "testname";
@@ -167,9 +173,10 @@ public class TeamBeanTest {
         }
     }
     
+    @Test
     public void deleteTeam()
     {
-    	Connection conn = null;
+        Connection conn = null;
         Statement st = null;
         ResultSet rs = null;
         String expectedName = "testname";

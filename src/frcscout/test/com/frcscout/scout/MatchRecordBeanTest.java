@@ -1,4 +1,4 @@
-package test.com.frcscout.scout;
+package com.frcscout.scout;
 
 public class MatchRecordBeanTest {
 

@@ -1,4 +1,4 @@
-package test.com.frcscout.teammember;
+package com.frcscout.teammember;
 
 public class EventTeamBeanTest {
 

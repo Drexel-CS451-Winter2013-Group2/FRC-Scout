@@ -1,5 +1,4 @@
-package test.com.frcscout.admin;
-
+package com.frcscout.admin;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,9 +16,10 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 public class EventBeanTest {
-
-	public void loadEvent() 
-	{
+    
+    @Test
+    public void loadEvent() 
+    {
         Connection conn = null;
         Statement st = null;
         ResultSet rs = null;
@@ -27,7 +27,7 @@ public class EventBeanTest {
         String testName = "testName";
         String testLocation = "testLocation";
         try {
-        	DBConnection dbconn = new TestMySQLConnection();
+            DBConnection dbconn = new TestMySQLConnection();
             conn = ManageTestMySQLDatabase.createConnection();
             assertTrue(ManageTestMySQLDatabase.createDatabase(conn));
             st = conn.createStatement();
@@ -53,16 +53,17 @@ public class EventBeanTest {
             }
         }
     }
-	
-	public void loadEvents()
-	{
-		Connection conn = null;
+    
+    @Test
+    public void loadEvents()
+    {
+        Connection conn = null;
         Statement st = null;
         ResultSet rs = null;
         String testName = "testName";
         String testLocation = "testLocation";
         try {
-        	DBConnection dbconn = new TestMySQLConnection();
+            DBConnection dbconn = new TestMySQLConnection();
             conn = ManageTestMySQLDatabase.createConnection();
             assertTrue(ManageTestMySQLDatabase.createDatabase(conn));
             st = conn.createStatement();
@@ -89,10 +90,11 @@ public class EventBeanTest {
                 a.printStackTrace();
             }
         }
-	}
-	
-	public void updateEvent()
-	{
+    }
+    
+    @Test
+    public void updateEvent()
+    {
         Connection conn = null;
         Statement st = null;
         ResultSet rs = null;
@@ -130,8 +132,8 @@ public class EventBeanTest {
                 a.printStackTrace();
             }
         }
-	}
-	
+    }
+    
     @Test
     public void insertEvent(){
         Connection conn = null;
@@ -164,13 +166,13 @@ public class EventBeanTest {
             } catch (SQLException a) {
                 a.printStackTrace();
             }
-            
         }
     }
     
+    @Test
     public void deleteEvent()
     {
-    	Connection conn = null;
+        Connection conn = null;
         Statement st = null;
         ResultSet rs = null;
         String expectedName = "testname";
