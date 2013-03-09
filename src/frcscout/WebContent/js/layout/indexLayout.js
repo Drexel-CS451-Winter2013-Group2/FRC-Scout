@@ -74,7 +74,7 @@ function getContentItems(){
             padding: 10,
             items: [{
             	xtype: 'combobox',
-            	fieldLabel: 'Select Event',
+            	fieldLabel: 'Select Team',
             	store: getTeamStore(),
             	queryMode: 'local',
             	displayField: 'id',
