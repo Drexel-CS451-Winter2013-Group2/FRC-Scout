@@ -5,6 +5,36 @@
         });
         return store1;
     }
+	
+	function getTeamStore() { //temp data generator
+        store1 = Ext.create('Ext.data.JsonStore', {
+            fields: ['id', 'name', 'location'],
+            data: teamJSON
+        });
+        return store1;
+    }
+	
+	function getTeamEventsStore() { //temp data generator
+		store1 = Ext.create('Ext.data.JsonStore', {
+            fields: ['id', 'event1', 'event2'],
+            data: [{ 'id': '1', 'event1': 30, 'event2': 29},
+                   { 'id': '2', 'event1': 20, 'event2': 49},
+                   { 'id': '3', 'event1': 43, 'event2': 55}
+            	]
+            });
+        return store1;
+	}
+	
+	function getRadarChartStore() {
+		store1 = Ext.create('Ext.data.JsonStore', {
+            fields: ['category', 'data'],
+            data: [{ 'category': 'Auton.', 'data': 30},
+                   { 'category': 'Teleop.', 'data': 50},
+                   { 'category': 'Climb', 'data': 20},
+            	]
+            });
+        return store1;
+	}
 
 function getContentItems(){
 	return [{
@@ -41,7 +71,26 @@ function getContentItems(){
             }]
         },{
             title: 'Group By Team',
-            html: '// TODO'
+            padding: 10,
+            items: [{
+            	xtype: 'combobox',
+            	fieldLabel: 'Select Event',
+            	store: getTeamStore(),
+            	queryMode: 'local',
+            	displayField: 'id',
+            	valueField: 'id'
+            }, {
+                xtype: 'tabpanel',
+                activeTab: 0,
+                tabPosition: 'top',
+                items: [{
+                    title: 'Team Profile',
+                    items: getTeamProfileItems()
+                },{
+                    title: 'View Matches',
+                    items: getTeamMatchItems()
+                }]
+            }]
         }]
     }];
 }
@@ -155,7 +204,7 @@ function getViewMatchItems() {
 			columns: [
 			    { header: 'Team #',  dataIndex: 'id', flex: 1},
                 { header: 'Auton. Points', dataIndex: 'autonomous' },
-                { header: 'Disc Points', dataIndex: 'teleop'},
+                { header: 'Teleop Points', dataIndex: 'teleop'},
                 { header: 'Climb Points', dataIndex: 'climb'},
                 { header: 'Total Points', dataIndex: 'total_points'}
 			],
@@ -168,7 +217,7 @@ function getViewMatchItems() {
 			columns: [
 			    { header: 'Team #',  dataIndex: 'id', flex: 1},
                 { header: 'Auton. Points', dataIndex: 'autonomous' },
-                { header: 'Disc Points', dataIndex: 'teleop'},
+                { header: 'Teleop Points', dataIndex: 'teleop'},
                 { header: 'Climb Points', dataIndex: 'climb'},
                 { header: 'Total Points', dataIndex: 'total_points'}
 			],
@@ -254,7 +303,7 @@ function getViewTeamItems() {
 			columns: [
 			    { header: 'Match #',  dataIndex: 'id', flex: 1},
                 { header: 'Auton. Points', dataIndex: 'autonomous' },
-                { header: 'Disc Points', dataIndex: 'teleop'},
+                { header: 'Teleop Points', dataIndex: 'teleop'},
                 { header: 'Climb Points', dataIndex: 'climb'},
                 { header: 'Total Points', dataIndex: 'total_points'}
 			],
@@ -331,4 +380,117 @@ function getViewTeamItems() {
 			}]
 		}]
 	}];
+}
+
+function getTeamProfileItems() {
+	return [{
+		layout: {
+			type: 'vbox',
+			align: 'left'
+		},
+		items: [{
+			layout: {
+				type: 'hbox',
+				align: 'left'
+			},
+			items: [{
+				xtype: 'gridpanel',
+				title: 'Event Averages',
+				id: 'eventAverageGrid',
+				//store: getTeamMatchStore(),
+				columns: [
+				    { header: 'Event',  dataIndex: 'id', flex: 1},
+	                { header: 'Auton. Points', dataIndex: 'autonomous' },
+	                { header: 'Teleop Points', dataIndex: 'teleop'},
+	                { header: 'Climb Points', dataIndex: 'climb'},
+	                { header: 'Total Points', dataIndex: 'total_points'}
+				],
+				width: 500
+			}, {
+				layout: {
+					type: 'vbox'
+				},
+				items: [{
+					xtype: 'panel',
+					html: 'Team profile area',
+					width: 300,
+					height: 300,
+				}, {
+					xtype: 'filefield',
+					buttonOnly: true,
+					
+				}]
+			}]
+		}, {
+			layout: {
+				type: 'hbox'
+			},
+			items: [{
+				xtype: 'chart',
+				animate: true,
+				width: 500,
+		    	height: 300,
+		    	store: getTeamEventsStore(),
+		    	legend: {
+		    		position: 'bottom'
+		    	},
+		    	axes: [{
+		    		type: 'Numeric',
+		    		position: 'left',
+		    		grid: true,
+		    		minimum: 0
+		    	}, {
+		    		type: 'Category',
+		    		position: 'bottom',
+		    		fields: ['id'],
+		    		title: 'Match #'
+		    	}],
+		    	series: [{
+		    		type: 'line',
+		    		axis: 'left',
+		    		xField: 'id',
+		    		yField: 'event1'
+		    	}, {
+		    		type: 'line',
+		    		axis: 'left',
+		    		xField: 'id',
+		    		yField: 'event2'
+		    	}]
+			}, {
+				xtype: 'chart',
+				width: 250,
+			    height: 250,
+			    margin: '25',
+			    animate: true,
+			    theme:'Category2',
+			    store: getRadarChartStore(),
+			    axes: [{
+			        type: 'Radial',
+			        position: 'radial',
+			        label: {
+			            display: true
+			        }
+			    }],
+			    series: [{
+			        type: 'radar',
+			        xField: 'category',
+			        yField: 'data',
+			        showMarkers: true,
+			        showInLegend: true,
+			        markerConfig: {
+			            radius: 5,
+			            size: 5
+			        },
+			        style: {
+			            'stroke-width': 2,
+			            fill: 'none'
+			        }
+			    }]
+			}]
+		}]
+	}];
+}
+
+function getTeamMatchItems() {
+	return [];
 }
