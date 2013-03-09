@@ -27,13 +27,23 @@ public class UserAccountBean {
     private DBConnection dbconn;
     
     public UserAccountBean() {
-        dbconn = new MySQLConnection();
-        id = null;
-        email = null;
-        password = null;
-        firstName = null;
-        lastName = null;
-        role = null;
+        this.dbconn = new MySQLConnection();
+        this.id = null;
+        this.email = null;
+        this.password = null;
+        this.firstName = null;
+        this.lastName = null;
+        this.role = null;
+    }
+    
+    public UserAccountBean(DBConnection dbconn) {
+        this.dbconn = dbconn;
+        this.id = null;
+        this.email = null;
+        this.password = null;
+        this.firstName = null;
+        this.lastName = null;
+        this.role = null;
     }
     
     public void loadUser(String id) {
@@ -344,10 +354,19 @@ public class UserAccountBean {
     }
     
     public int getId() {
-        return this.id.intValue();
+        if (this.id != null) {
+            return this.id.intValue();
+        } else {
+            return -1;
+        }
+        
     }
     
     public int getRole() {
-        return this.role.ordinal() + 1;
+        if (this.role != null) {
+            return this.role.ordinal() + 1;
+        } else {
+            return -1;
+        }
     }
 }
