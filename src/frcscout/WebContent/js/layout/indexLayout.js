@@ -28,7 +28,7 @@
 	function getRadarChartStore() {
 		store1 = Ext.create('Ext.data.JsonStore', {
             fields: ['category', 'data'],
-            data: [{ 'category': 'Auton.', 'data': 30},
+            data: [{ 'category': 'Auton.', 'data': 24},
                    { 'category': 'Teleop.', 'data': 50},
                    { 'category': 'Climb', 'data': 20},
             	]
@@ -153,7 +153,6 @@ function getOverviewItems() {
         },
         items: [{
         	xtype: 'gridpanel',
-        	title: '[Event Name] Overview',
             id: 'eventOverviewGrid',
             store: getOverviewStore(),
             columns: [
@@ -164,13 +163,15 @@ function getOverviewItems() {
                 { header: 'Climb Points', dataIndex: 'climb'},
             ],
             height: 400,
-            width: 500
+            width: 500, 
+            margin: 10
         }, overviewChart]
 	}];
 }
 
 function getViewMatchItems() {
 	return [{
+		defaultType: 'container',
 		layout: {
 			type: 'vbox',
 			align: 'left',
@@ -181,23 +182,30 @@ function getViewMatchItems() {
 			},
 			items: [{
 				xtype: 'panel',
+				border: false,
 		        html: '<h1>Match [#]</h1>',
+		        margin: 10,
 			}, {
 				xtype: 'panel',
+				border: false,
 				items: [{
 					xtype: 'textfield',
+					border: false,
 					name: 'matchSearchBox',
 					fieldLabel: 'Match search'
-				}]
+				}],
+				margin: '10 0 10 120'
 			}, {
 				xtype: 'button',
 				text: 'Search',
 				handler: function() {
 					alert('Search for a specified match number.');
-				}
+				},
+				margin: 10
 			}]
 		}, {
 			xtype: 'gridpanel',
+			defaultType: 'container',
 			title: 'Red Alliance',
 			id: 'redAllianceGrid',
 			//store: getRedAllianceStore(),
@@ -208,9 +216,11 @@ function getViewMatchItems() {
                 { header: 'Climb Points', dataIndex: 'climb'},
                 { header: 'Total Points', dataIndex: 'total_points'}
 			],
-			width: 500
+			width: 500,
+			margin: 10
 		}, {
 			xtype: 'gridpanel',
+			defaultType: 'container',
 			title: 'Blue Alliance',
 			id: 'blueAllianceGrid',
 			//store: getBlueAllianceStore(),
@@ -221,13 +231,15 @@ function getViewMatchItems() {
                 { header: 'Climb Points', dataIndex: 'climb'},
                 { header: 'Total Points', dataIndex: 'total_points'}
 			],
-			width: 500
+			width: 500,
+			margin: 10
 		}, {
 			xtype: 'button',
 			text: 'View Match Record',
 			handler: function() {
 				alert('This button brings up a detailed view for the selected match record.');
-			}
+			},
+			margin: '0 0 10 400'
 		}]
 	}];
 }
@@ -270,19 +282,25 @@ function getTeamPieChartStore() {	// Temp data generator
 
 function getViewTeamItems() {
 	return [{
+		defaultType: 'container',
 		layout: {
 			type: 'vbox',
 			align: 'left'
 		},
 		items: [{
+			margin: 10,
 			layout: {
 				type: 'hbox'
 			},
 			items: [{
 				xtype: 'panel',
+				border: false,
+				margin: '10 0 0 0',
 				html: '<h1>Team [#]</h1>'
 			}, {
 				xtype: 'panel',
+				border: false,
+				margin: '10 0 0 150',
 				items: [{
 					xtype: 'textfield',
 					name: 'teamSearchBox',
@@ -291,6 +309,7 @@ function getViewTeamItems() {
 			}, {
 				xtype: 'button',
 				text: 'search',
+				margin: '10 0 0 5',
 				handler: function() {
 					alert('This will search for matches and update the tables below!');
 				}
@@ -307,13 +326,15 @@ function getViewTeamItems() {
                 { header: 'Climb Points', dataIndex: 'climb'},
                 { header: 'Total Points', dataIndex: 'total_points'}
 			],
-			width: 500
+			width: 500,
+			margin: '0 0 0 10',
 		}, {
 			xtype: 'button',
 			text: 'View Match Record',
 			handler: function() {
 				alert('This will bring up a detailed view for the selected match record.');
-			}
+			},
+			margin: '10 0 0 400'
 		}, {
 			layout: {
 				type: 'hbox'
@@ -321,11 +342,12 @@ function getViewTeamItems() {
 			items: [{
 				xtype: 'chart',
 				animate: true,
-				width: 300,
+				width: 500,
 		    	height: 300,
+		    	margin: 10,
 		    	store: getTeamMatchStore(),
 		    	legend: {
-		    		position: 'left'
+		    		position: 'bottom'
 		    	},
 		    	axes: [{
 		    		type: 'Numeric',
@@ -384,11 +406,13 @@ function getViewTeamItems() {
 
 function getTeamProfileItems() {
 	return [{
+		defaultType: 'container',
 		layout: {
 			type: 'vbox',
 			align: 'left'
 		},
 		items: [{
+			defaultType: 'container',
 			layout: {
 				type: 'hbox',
 				align: 'left'
@@ -405,31 +429,38 @@ function getTeamProfileItems() {
 	                { header: 'Climb Points', dataIndex: 'climb'},
 	                { header: 'Total Points', dataIndex: 'total_points'}
 				],
-				width: 500
+				width: 500,
+				margin: 10
 			}, {
+				defaultType: 'container',
 				layout: {
 					type: 'vbox'
 				},
 				items: [{
 					xtype: 'panel',
+					border: false,
 					html: 'Team profile area',
-					width: 300,
+					width: 350,
 					height: 300,
+					margin: 10
 				}, {
 					xtype: 'filefield',
 					buttonOnly: true,
-					
+					margin: '0 0 0 100'
 				}]
 			}]
 		}, {
+			defaultType: 'container',
 			layout: {
 				type: 'hbox'
 			},
 			items: [{
 				xtype: 'chart',
+				defaultType: 'container',
 				animate: true,
 				width: 500,
 		    	height: 300,
+		    	margin: 25,
 		    	store: getTeamEventsStore(),
 		    	legend: {
 		    		position: 'bottom'
@@ -437,9 +468,10 @@ function getTeamProfileItems() {
 		    	axes: [{
 		    		type: 'Numeric',
 		    		position: 'left',
+		    		title: 'Points Scored',
 		    		grid: true,
 		    		minimum: 0
-		    	}, {
+		    	},{
 		    		type: 'Category',
 		    		position: 'bottom',
 		    		fields: ['id'],
@@ -458,9 +490,10 @@ function getTeamProfileItems() {
 		    	}]
 			}, {
 				xtype: 'chart',
-				width: 250,
+				defaultType: 'container',
+				width: 350,
 			    height: 250,
-			    margin: '25',
+			    margin: '25 0 0 0',
 			    animate: true,
 			    theme:'Category2',
 			    store: getRadarChartStore(),
@@ -492,5 +525,32 @@ function getTeamProfileItems() {
 }
 
 function getTeamMatchItems() {
-	return [];
+	return [{
+		defaultType: 'container',
+		layout: {
+			type: 'vbox',
+			align: 'left'
+		},
+		items: [{
+			defaultType: 'container',
+			xtype: 'gridpanel',
+			//store: ,
+			columns: [
+			    { header: 'Event',  dataIndex: 'event'},
+                { header: 'Match #', dataIndex: 'match_id' },
+                { header: 'Auton Points', dataIndex: 'autonomous' },
+                { header: 'Teleop Points', dataIndex: 'teleop'},
+                { header: 'Climb Points', dataIndex: 'climb'},
+                { header: 'Total Points', dataIndex: 'total_points'}
+			],
+			margin: 10,
+		}, {
+			xtype: 'button',
+			text: 'View Match Record',
+			handler: function() {
+				alert('Open match record with all details filled in.');
+			},
+			margin: '0 0 10 500'
+		}]
+	}];
 }
