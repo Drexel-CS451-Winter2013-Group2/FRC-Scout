@@ -1,11 +1,51 @@
+    function getTeamAveragesStore() { 
+        store1 = Ext.create('Ext.data.JsonStore', {
+            fields: ['id', 'total_points', 'autonomous', 'teleop', 'climb'],
+            sorters: ['id', 'total_points'],
+            data: teamAveragesJSON
+        });
+        return store1;
+    }
+    
+    function getTeamMatchStore() { 
+        store1 = Ext.create('Ext.data.JsonStore', {
+            fields: ['event_id', 'match_id', 'autonomous', 'teleop', 'climb', 'total_points',],
+            sorters: ['id', 'total_points'],
+            data: teamMatchJSON
+        });
+        return store1;
+    }
+    
+    function getTeamChartStore() { 
+        store1 = Ext.create('Ext.data.JsonStore', {
+            fields: ['id', 'total_points', 'autonomous', 'teleop', 'climb'],
+            sorters: ['id', 'total_points'],
+            data: teamChartJSON
+        });
+        return store1;
+    }
+    
+    function getRadarChartStore() {
+        store1 = Ext.create('Ext.data.JsonStore', {
+            fields: ['category', 'total'],
+            data: teamRadarChartJSON
+            });
+        return store1;
+    }
+
 function getGroupByTeamItems() {
     return [{
         xtype: 'combobox',
         fieldLabel: 'Select Team',
         store: getTeamStore(),
+        value: selectedTeamTeam,
         queryMode: 'local',
-        displayField: 'id',
-        valueField: 'id'
+        displayField: 'name',
+        valueField: 'id',
+        listeners: {
+            select: function( combo, records, eOpts){ window.location = "/frcscout/index.jsp?teamteam=" + records[0].data.id; 
+            },
+        }
     }, {
         xtype: 'tabpanel',
         activeTab: 0,
@@ -35,9 +75,9 @@ function getTeamProfileItems() {
             },
             items: [{
                 xtype: 'gridpanel',
-                title: 'Event Averages',
+                title: 'Event Points (Averaged by Match)',
                 id: 'eventAverageGrid',
-                //store: getTeamMatchStore(),
+                store: getTeamAveragesStore(),
                 columns: [
                     { header: 'Event',  dataIndex: 'id', flex: 1},
                     { header: 'Auton. Points', dataIndex: 'autonomous' },
@@ -57,7 +97,6 @@ function getTeamProfileItems() {
                     border: false,
                     html: 'Team profile area',
                     width: 350,
-                    height: 300,
                     margin: 10
                 }, {
                     xtype: 'filefield',
@@ -77,7 +116,7 @@ function getTeamProfileItems() {
                 width: 500,
                 height: 300,
                 margin: 25,
-                store: getTeamEventsStore(),
+                store: getTeamChartStore(),
                 legend: {
                     position: 'bottom'
                 },
@@ -91,18 +130,13 @@ function getTeamProfileItems() {
                     type: 'Category',
                     position: 'bottom',
                     fields: ['id'],
-                    title: 'Match #'
+                    title: 'Event #'
                 }],
                 series: [{
                     type: 'line',
                     axis: 'left',
                     xField: 'id',
-                    yField: 'event1'
-                }, {
-                    type: 'line',
-                    axis: 'left',
-                    xField: 'id',
-                    yField: 'event2'
+                    yField: 'total_points'
                 }]
             }, {
                 xtype: 'chart',
@@ -123,7 +157,7 @@ function getTeamProfileItems() {
                 series: [{
                     type: 'radar',
                     xField: 'category',
-                    yField: 'data',
+                    yField: 'total',
                     showMarkers: true,
                     showInLegend: true,
                     markerConfig: {
@@ -150,9 +184,9 @@ function getTeamMatchItems() {
         items: [{
             defaultType: 'container',
             xtype: 'gridpanel',
-            //store: ,
+            store: getTeamMatchStore(),
             columns: [
-                { header: 'Event',  dataIndex: 'event'},
+                { header: 'Event',  dataIndex: 'event_id'},
                 { header: 'Match #', dataIndex: 'match_id' },
                 { header: 'Auton Points', dataIndex: 'autonomous' },
                 { header: 'Teleop Points', dataIndex: 'teleop'},
