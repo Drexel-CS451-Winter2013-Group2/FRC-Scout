@@ -261,7 +261,7 @@ public class GroupByEventBean {
         JSONArray json = new JSONArray();
         try {
             conn = dbconn.getConnection();
-            st = conn.prepareStatement("SELECT match_number, sum(auton_top)*6 + sum(auton_middle)*4  + sum(auton_bottom)*2 as auton, sum(teleop_top)*3 + sum(teleop_middle)*2 + sum(teleop_bottom) + sum(teleop_pyramid)*5 as teleop, sum(pyramid_level) as climb FROM match_record_2013 where event_id = ? AND team_id = ?");
+            st = conn.prepareStatement("SELECT sum(auton_top)*6 + sum(auton_middle)*4  + sum(auton_bottom)*2 as auton, sum(teleop_top)*3 + sum(teleop_middle)*2 + sum(teleop_bottom) + sum(teleop_pyramid)*5 as teleop, sum(pyramid_level) as climb FROM match_record_2013 where event_id = ? AND team_id = ?");
             st.setInt(1, getSelectedEvent());
             st.setInt(2, getSelectedTeam());
             rs = st.executeQuery();
