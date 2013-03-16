@@ -13,6 +13,7 @@
         });
         return store1;
     }
+    
     function getTeamStore() { //temp data generator
         store1 = Ext.create('Ext.data.JsonStore', {
             fields: ['id', 'name', 'location'],
@@ -20,7 +21,6 @@
         });
         return store1;
     }
-
 
 function getContentItems(){
     return [{
@@ -124,7 +124,7 @@ function getTeamItems() {
             items: [{
                 text: 'Add',
                 handler: function() {
-                    window.location = "/frcscout/admin/addTeam.jsp";
+                    window.location = "/frcscout/scout/addTeam.jsp?return=admin/admin.jsp?tab=1";
                 }
             }, {
                 text: 'Edit',
