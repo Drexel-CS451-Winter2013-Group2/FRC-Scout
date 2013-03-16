@@ -16,12 +16,13 @@
     var overviewTableJSON = <%=GroupByEventBean.getOverviewTable() %>;
     var redTeamTableJSON = <%=GroupByEventBean.getRedTeamTable() %>;
     var blueTeamTableJSON = <%=GroupByEventBean.getBlueTeamTable() %>;
-    var teamTableJSON = <%=GroupByEventBean.getTeamTable() %>;
+    var teamDataJSON = <%=GroupByEventBean.getTeamData() %>;
     var teamPieChartJSON = <%=GroupByEventBean.getTeamPieChart() %>;
-    var teamLineGraphJSON = <%=GroupByEventBean.getTeamLineGraph() %>;
 
 </script>
 
-<script src="/frcscout/js/layout/indexLayout.js"></script> 
+<script src="/frcscout/js/layout/groupByEventLayout.js"></script> 
+<script src="/frcscout/js/layout/groupByTeamLayout.js"></script>  
+<script src="/frcscout/js/layout/indexLayout.js"></script>
 
 <%@ include file="../include/footer.jsp" %>
