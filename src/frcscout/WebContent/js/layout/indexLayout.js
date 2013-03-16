@@ -23,6 +23,24 @@
         return store1;
     }
     
+    function getRedAllianceStore() {
+        store1 = Ext.create('Ext.data.JsonStore', {
+            fields: ['id', 'total_points', 'autonomous', 'teleop', 'climb'],
+            sorters: ['id', 'total_points'],
+            data: redTeamTableJSON
+        });
+        return store1;
+    }
+    
+    function getBlueAllianceStore() {
+        store1 = Ext.create('Ext.data.JsonStore', {
+            fields: ['id', 'total_points', 'autonomous', 'teleop', 'climb'],
+            sorters: ['id', 'total_points'],
+            data: blueTeamTableJSON
+        });
+        return store1;
+    }
+    
     function getOverviewChartStore() { 
         store1 = Ext.create('Ext.data.JsonStore', {
             fields: ['id', 'total_points', 'autonomous', 'teleop', 'climb'],
@@ -180,6 +198,13 @@ function getOverviewItems() {
     }];
 }
 
+function getMatchTitle() {
+    if (selectedMatch > 0) {
+        return '<h1>Match ' + selectedMatch + '</h1>';
+    }
+    return '<h1>Select match by search</h1>';
+}
+
 function getViewMatchItems() {
     return [{
         defaultType: 'container',
@@ -194,32 +219,35 @@ function getViewMatchItems() {
             items: [{
                 xtype: 'panel',
                 border: false,
-                html: '<h1>Match [#]</h1>',
+                html: getMatchTitle(),
                 margin: 10,
             }, {
-                xtype: 'panel',
+                xtype: 'form',
                 border: false,
+                layout: 'hbox',
                 items: [{
                     xtype: 'textfield',
                     border: false,
                     name: 'matchSearchBox',
-                    fieldLabel: 'Match search'
+                    id: 'matchSearchBox',
+                    fieldLabel: 'Match search',
+                    allowBlank: false
+                }, {
+                    xtype: 'button',
+                    text: 'Search',
+                    handler: function() {
+                        this.up('form').getForm().isValid();
+                        window.location = '/frcscout/index.jsp?match=' + this.up('form').down('#matchSearchBox').value;
+                    }
                 }],
                 margin: '10 0 10 120'
-            }, {
-                xtype: 'button',
-                text: 'Search',
-                handler: function() {
-                    alert('Search for a specified match number.');
-                },
-                margin: 10
             }]
         }, {
             xtype: 'gridpanel',
             defaultType: 'container',
             title: 'Red Alliance',
             id: 'redAllianceGrid',
-            //store: getRedAllianceStore(),
+            store: getRedAllianceStore(),
             columns: [
                 { header: 'Team #',  dataIndex: 'id', flex: 1},
                 { header: 'Auton. Points', dataIndex: 'autonomous' },
@@ -234,7 +262,7 @@ function getViewMatchItems() {
             defaultType: 'container',
             title: 'Blue Alliance',
             id: 'blueAllianceGrid',
-            //store: getBlueAllianceStore(),
+            store: getBlueAllianceStore(),
             columns: [
                 { header: 'Team #',  dataIndex: 'id', flex: 1},
                 { header: 'Auton. Points', dataIndex: 'autonomous' },
@@ -291,6 +319,13 @@ function getTeamPieChartStore() {    // Temp data generator
     return store2;
 }
 
+function getTeamTitle() {
+    if (selectedMatch > 0) {
+        return '<h1>Team ' + selectedTeam + '</h1>';
+    }
+    return '<h1>Select team by search</h1>';
+}
+
 function getViewTeamItems() {
     return [{
         defaultType: 'container',
@@ -307,7 +342,7 @@ function getViewTeamItems() {
                 xtype: 'panel',
                 border: false,
                 margin: '10 0 0 0',
-                html: '<h1>Team [#]</h1>'
+                html: getTeamTitle(),
             }, {
                 xtype: 'panel',
                 border: false,

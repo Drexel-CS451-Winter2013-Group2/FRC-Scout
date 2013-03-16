@@ -118,66 +118,35 @@ public class GroupByEventBean {
         return json.toString();
     }
     
-    @SuppressWarnings("unchecked")
+    
     public String getRedTeamTable() {
-        PreparedStatement st = null;
-        ResultSet rs = null;
-        JSONArray json = new JSONArray();
-        try {
-            conn = dbconn.getConnection();
-            st = conn.prepareStatement("SELECT team_id, sum(auton_top) as auton_top, sum(auton_middle) as auton_mid, sum(auton_bottom) as auton_low, sum(teleop_top) as teleop_top, sum(teleop_middle) as teleop_mid, sum(teleop_bottom) as teleop_low, sum(teleop_pyramid) as teleop_pyramid, sum(pyramid_level) as climb FROM match_record_2013 where event_id = ? AND match_number = ? AND color = 'red' GROUP BY team_id");
-            st.setInt(1, getSelectedEvent());
-            st.setInt(2, getSelectedTeam());
-            rs = st.executeQuery();
-            while (rs.next()) {
-                JSONObject o = new JSONObject();
-                int autonTotal = 6 * rs.getInt("auton_top") + 4 * rs.getInt("auton_mid") + 2 * rs.getInt("auton_low");
-                int teleopTotal = 3 * rs.getInt("teleop_top") + 2 * rs.getInt("teleop_mid") + 1 * rs.getInt("teleop_low") + 5 * rs.getInt("teleop_pyramid");
-                int climbTotal = rs.getInt("climb");
-                
-                o.put("id", rs.getInt("team_id"));
-                o.put("autonomous", autonTotal);
-                o.put("teleop", teleopTotal);
-                o.put("climb", climbTotal);
-                o.put("total_points", autonTotal + teleopTotal + climbTotal);
-                json.add(o);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try{
-                conn.close();
-                st.close();
-                rs.close();
-            }catch (SQLException e) {
-                System.out.println("Error closing query");
-            }
-        }
-        return json.toString();
+        return generateColorTeamTable("red");
+    }
+    
+    public String getBlueTeamTable() {
+        return generateColorTeamTable("blue");
     }
     
     @SuppressWarnings("unchecked")
-    public String getBlueTeamTable() {
+    private String generateColorTeamTable(String color) {
         PreparedStatement st = null;
         ResultSet rs = null;
         JSONArray json = new JSONArray();
         try {
             conn = dbconn.getConnection();
-            st = conn.prepareStatement("SELECT team_id, sum(auton_top) as auton_top, sum(auton_middle) as auton_mid, sum(auton_bottom) as auton_low, sum(teleop_top) as teleop_top, sum(teleop_middle) as teleop_mid, sum(teleop_bottom) as teleop_low, sum(teleop_pyramid) as teleop_pyramid, sum(pyramid_level) as climb FROM match_record_2013 where event_id = ? AND match_number = ? AND color = 'blue' GROUP BY team_id");
+            st = conn.prepareStatement("SELECT team_id, sum(auton_top)*6 + sum(auton_middle)*4  + sum(auton_bottom)*2 as auton, sum(teleop_top)*3 + sum(teleop_middle)*2 + sum(teleop_bottom) + sum(teleop_pyramid)*5 as teleop, sum(pyramid_level) as climb, sum(auton_top)*6 + sum(auton_middle)*4  + sum(auton_bottom)*2 + sum(teleop_top)*3 + sum(teleop_middle)*2 + sum(teleop_bottom) + sum(teleop_pyramid)*5 + sum(pyramid_level) as total FROM match_record_2013 where event_id = ? AND match_number = ? AND color = ? GROUP BY team_id");
             st.setInt(1, getSelectedEvent());
             st.setInt(2, getSelectedMatch());
+            st.setString(3, color);
             rs = st.executeQuery();
             while (rs.next()) {
                 JSONObject o = new JSONObject();
-                int autonTotal = 6 * rs.getInt("auton_top") + 4 * rs.getInt("auton_mid") + 2 * rs.getInt("auton_low");
-                int teleopTotal = 3 * rs.getInt("teleop_top") + 2 * rs.getInt("teleop_mid") + 1 * rs.getInt("teleop_low") + 5 * rs.getInt("teleop_pyramid");
-                int climbTotal = rs.getInt("climb");
                 
                 o.put("id", rs.getInt("team_id"));
-                o.put("autonomous", autonTotal);
-                o.put("teleop", teleopTotal);
-                o.put("climb", climbTotal);
-                o.put("total_points", autonTotal + teleopTotal + climbTotal);
+                o.put("autonomous", rs.getInt("auton"));
+                o.put("teleop", rs.getInt("teleop"));
+                o.put("climb", rs.getInt("climb"));
+                o.put("total_points", rs.getInt("total"));
                 json.add(o);
             }
         } catch (SQLException e) {
@@ -382,6 +351,8 @@ public class GroupByEventBean {
     public void setSelectedEvent(int event) {
         if (event > 0) {
             this.selectedEvent = Integer.valueOf(event);
+            this.selectedTeam = null;
+            this.selectedMatch = null;
         }
     }
     
@@ -394,7 +365,9 @@ public class GroupByEventBean {
     }
     
     public void setSelectedTeam(int team) {
-        this.selectedTeam = Integer.valueOf(team);
+        if (team > 0) {
+            this.selectedTeam = Integer.valueOf(team);
+        }
     }
     
     public int getSelectedMatch() {
@@ -406,7 +379,9 @@ public class GroupByEventBean {
     }
     
     public void setSelectedMatch(int match) {
-        this.selectedMatch = Integer.valueOf(match);
+        if (match > 0) {
+            this.selectedMatch = Integer.valueOf(match);
+        }
     }
 
 }
