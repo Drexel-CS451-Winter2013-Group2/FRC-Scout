@@ -6,6 +6,6 @@
 <jsp:setProperty name="TeamBean" property="location" value="${param.location}"/>
 <%TeamBean.insertTeam();%> 
 
-<%response.sendRedirect("/frcscout/admin/admin.jsp?tab=1"); %>
+<%response.sendRedirect("/frcscout/" + request.getParameter("return")); %>
 
 <%@ include file="../include/footer.jsp" %>
