@@ -57,7 +57,7 @@ public class GroupByEventBean {
         JSONArray json = new JSONArray();
         try {
             conn = dbconn.getConnection();
-            st = conn.prepareStatement("SELECT team_id, sum(auton_top)*6 + sum(auton_middle)*4  + sum(auton_bottom)*2 as auton, sum(teleop_top)*3 + sum(teleop_middle)*2 + sum(teleop_bottom) + sum(teleop_pyramid)*5 as teleop, sum(pyramid_level)*10 as climb, sum(auton_top)*6 + sum(auton_middle)*4  + sum(auton_bottom)*2 + sum(teleop_top)*3 + sum(teleop_middle)*2 + sum(teleop_bottom) + sum(teleop_pyramid)*5 + sum(pyramid_level) as total FROM match_record_2013 WHERE event_id = ? GROUP BY team_id");
+            st = conn.prepareStatement("SELECT team_id, sum(auton_top)*6 + sum(auton_middle)*4  + sum(auton_bottom)*2 as auton, sum(teleop_top)*3 + sum(teleop_middle)*2 + sum(teleop_bottom) + sum(teleop_pyramid)*5 as teleop, sum(pyramid_level)*10 as climb, sum(auton_top)*6 + sum(auton_middle)*4  + sum(auton_bottom)*2 + sum(teleop_top)*3 + sum(teleop_middle)*2 + sum(teleop_bottom) + sum(teleop_pyramid)*5 + sum(pyramid_level)*10 as total FROM match_record_2013 WHERE event_id = ? GROUP BY team_id");
             st.setInt(1, getSelectedEvent());
             rs = st.executeQuery();
             while (rs.next()) {
@@ -91,7 +91,7 @@ public class GroupByEventBean {
         JSONArray json = new JSONArray();
         try {
             conn = dbconn.getConnection();
-            st = conn.prepareStatement("SELECT team_id, sum(auton_top)*6 + sum(auton_middle)*4  + sum(auton_bottom)*2 as auton, sum(teleop_top)*3 + sum(teleop_middle)*2 + sum(teleop_bottom) + sum(teleop_pyramid)*5 as teleop, sum(pyramid_level)*10 as climb, sum(auton_top)*6 + sum(auton_middle)*4  + sum(auton_bottom)*2 + sum(teleop_top)*3 + sum(teleop_middle)*2 + sum(teleop_bottom) + sum(teleop_pyramid)*5 + sum(pyramid_level) as total FROM match_record_2013 WHERE event_id = ? GROUP BY team_id order by total desc limit 10");
+            st = conn.prepareStatement("SELECT team_id, sum(auton_top)*6 + sum(auton_middle)*4  + sum(auton_bottom)*2 as auton, sum(teleop_top)*3 + sum(teleop_middle)*2 + sum(teleop_bottom) + sum(teleop_pyramid)*5 as teleop, sum(pyramid_level)*10 as climb, sum(auton_top)*6 + sum(auton_middle)*4  + sum(auton_bottom)*2 + sum(teleop_top)*3 + sum(teleop_middle)*2 + sum(teleop_bottom) + sum(teleop_pyramid)*5 + sum(pyramid_level)*10 as total FROM match_record_2013 WHERE event_id = ? GROUP BY team_id order by total desc limit 10");
             st.setInt(1, getSelectedEvent());
             rs = st.executeQuery();
             while (rs.next()) {
@@ -134,7 +134,7 @@ public class GroupByEventBean {
         JSONArray json = new JSONArray();
         try {
             conn = dbconn.getConnection();
-            st = conn.prepareStatement("SELECT team_id, sum(auton_top)*6 + sum(auton_middle)*4  + sum(auton_bottom)*2 as auton, sum(teleop_top)*3 + sum(teleop_middle)*2 + sum(teleop_bottom) + sum(teleop_pyramid)*5 as teleop, sum(pyramid_level)*10 as climb, sum(auton_top)*6 + sum(auton_middle)*4  + sum(auton_bottom)*2 + sum(teleop_top)*3 + sum(teleop_middle)*2 + sum(teleop_bottom) + sum(teleop_pyramid)*5 + sum(pyramid_level) as total FROM match_record_2013 where event_id = ? AND match_number = ? AND color = ? GROUP BY team_id");
+            st = conn.prepareStatement("SELECT team_id, sum(auton_top)*6 + sum(auton_middle)*4  + sum(auton_bottom)*2 as auton, sum(teleop_top)*3 + sum(teleop_middle)*2 + sum(teleop_bottom) + sum(teleop_pyramid)*5 as teleop, sum(pyramid_level)*10 as climb, sum(auton_top)*6 + sum(auton_middle)*4  + sum(auton_bottom)*2 + sum(teleop_top)*3 + sum(teleop_middle)*2 + sum(teleop_bottom) + sum(teleop_pyramid)*5 + sum(pyramid_level)*10 as total FROM match_record_2013 where event_id = ? AND match_number = ? AND color = ? GROUP BY team_id");
             st.setInt(1, getSelectedEvent());
             st.setInt(2, getSelectedMatch());
             st.setString(3, color);
@@ -226,7 +226,7 @@ public class GroupByEventBean {
         JSONArray json = new JSONArray();
         try {
             conn = dbconn.getConnection();
-            st = conn.prepareStatement("SELECT match_number, sum(auton_top)*6 + sum(auton_middle)*4  + sum(auton_bottom)*2 as auton, sum(teleop_top)*3 + sum(teleop_middle)*2 + sum(teleop_bottom) + sum(teleop_pyramid)*5 as teleop, sum(pyramid_level)*10 as climb, sum(auton_top)*6 + sum(auton_middle)*4  + sum(auton_bottom)*2 + sum(teleop_top)*3 + sum(teleop_middle)*2 + sum(teleop_bottom) + sum(teleop_pyramid)*5 + sum(pyramid_level) as total FROM match_record_2013 where event_id = ? AND team_id = ? GROUP BY match_number");
+            st = conn.prepareStatement("SELECT match_number, sum(auton_top)*6 + sum(auton_middle)*4  + sum(auton_bottom)*2 as auton, sum(teleop_top)*3 + sum(teleop_middle)*2 + sum(teleop_bottom) + sum(teleop_pyramid)*5 as teleop, sum(pyramid_level)*10 as climb, sum(auton_top)*6 + sum(auton_middle)*4  + sum(auton_bottom)*2 + sum(teleop_top)*3 + sum(teleop_middle)*2 + sum(teleop_bottom) + sum(teleop_pyramid)*5 + sum(pyramid_level)*10 as total FROM match_record_2013 where event_id = ? AND team_id = ? GROUP BY match_number");
             st.setInt(1, getSelectedEvent());
             st.setInt(2, getSelectedTeam());
             rs = st.executeQuery();
