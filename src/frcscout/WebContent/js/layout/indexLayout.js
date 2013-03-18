@@ -17,7 +17,7 @@
 function getContentItems(){
     return [{
         xtype: 'tabpanel',
-        activeTab: 0,
+        activeTab: parseInt(getURLParameter('grouptab')),
         tabPosition: 'top',
         overflowY: 'auto',
         overflowX: 'auto',
