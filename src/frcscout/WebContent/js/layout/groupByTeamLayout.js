@@ -48,7 +48,7 @@ function getGroupByTeamItems() {
         store: getTeamStore(),
         value: getTeamValue(),
         queryMode: 'local',
-        displayField: 'name',
+        displayField: 'id',
         valueField: 'id',
         listeners: {
             select: function( combo, records, eOpts){ window.location = "/frcscout/index.jsp?teamteam=" + records[0].data.id + '&grouptab=1&teamtab=' + Ext.getCmp('teamTab').items.indexOf(Ext.getCmp('teamTab').getActiveTab()); 
