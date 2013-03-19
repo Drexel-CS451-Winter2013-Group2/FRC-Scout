@@ -326,7 +326,7 @@ function getViewTeamItems() {
                 }, {
                     type: 'Category',
                     position: 'bottom',
-                    fields: ['id'],
+                    fields: ['match_id'],
                     title: 'Match #'
                 }],
                 series: [{
