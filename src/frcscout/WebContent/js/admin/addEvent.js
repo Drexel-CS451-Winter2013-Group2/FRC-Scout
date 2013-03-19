@@ -25,11 +25,13 @@ function getContentItems(){
         }, {
             xtype: 'datefield',
             name: 'startDate',
-            fieldLabel: 'Start Date:'
+            fieldLabel: 'Start Date:',
+            allowBlank: false
         }, {
             xtype: 'datefield',
             name: 'endDate',
-            fieldLabel: 'End Date:'
+            fieldLabel: 'End Date:',
+            allowBlank: false
         }, {
             xtype: 'combo',
             mode: 'local',

@@ -32,12 +32,14 @@ function getContentItems(){
             xtype: 'datefield',
             name: 'startDate',
             value: startDate,
-            fieldLabel: 'Start Date:'
+            fieldLabel: 'Start Date:',
+            allowBlank: false
         }, {
             xtype: 'datefield',
             name: 'endDate',
             value: endDate,
-            fieldLabel: 'End Date:'
+            fieldLabel: 'End Date:',
+            allowBlank: false
         }],
         buttons: [{
             text: 'Save',
