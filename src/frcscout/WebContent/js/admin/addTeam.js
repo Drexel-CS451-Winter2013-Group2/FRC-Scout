@@ -13,16 +13,20 @@ function getContentItems(){
             anchor: '100%'
         },
         items: [{
+            xtype: 'hidden',
+            name: 'return',
+            value: getURLParameter('return')
+        }, {
             xtype: 'textfield',
             name: 'id',
             fieldLabel: 'Team Number:',
             regex: /^[0-9]+$/,
-            regexText:'Team number must be an integer'
+            regexText:'Team number must be an integer',
+            allowBlank: false
         }, {
             xtype: 'textfield',
             name: 'name',
-            fieldLabel: 'Name:',
-            allowBlank: false
+            fieldLabel: 'Name:',            
         }, {
             xtype: 'textfield',
             name: 'location',
