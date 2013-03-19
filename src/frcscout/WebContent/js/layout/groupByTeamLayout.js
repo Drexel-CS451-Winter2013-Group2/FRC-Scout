@@ -9,7 +9,7 @@
     
     function getTeamMatchStore() { 
         store1 = Ext.create('Ext.data.JsonStore', {
-            fields: ['event_id', 'event_name', 'match_id', 'autonomous', 'teleop', 'climb', 'total_points',],
+            fields: ['id', 'event_id', 'event_name', 'match_id', 'autonomous', 'teleop', 'climb', 'total_points',],
             sorters: ['event_name', 'total_points'],
             data: teamMatchJSON
         });
@@ -193,6 +193,7 @@ function getTeamMatchItems() {
         items: [{
             defaultType: 'container',
             xtype: 'gridpanel',
+            id: 'teamTeamMatchGrid',
             store: getTeamMatchStore(),
             columns: [
                 { header: 'Event',  dataIndex: 'event_name'},
@@ -207,7 +208,8 @@ function getTeamMatchItems() {
             xtype: 'button',
             text: 'View Match Record',
             handler: function() {
-                alert('Open match record with all details filled in.');
+                var a = Ext.getCmp('teamTeamMatchGrid').getSelectionModel().getSelection()[0].data.id;
+                window.location="/frcscout/viewMatchRecord.jsp?id=" + a + "&return=index.jsp?grouptab=1&teamtab=1";
             },
             margin: '0 0 10 500'
         }]

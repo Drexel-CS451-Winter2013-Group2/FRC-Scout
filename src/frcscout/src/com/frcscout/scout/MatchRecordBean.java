@@ -262,7 +262,7 @@ public class MatchRecordBean {
                     setComments(rs.getString("comments"));
                     setPath(rs.getString("path"));    // TODO path
                 } else {
-                    System.out.println("match record id " + this.id.toString() + " not found");
+                    System.out.println("match record id " + id.toString() + " not found");
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -380,7 +380,12 @@ public class MatchRecordBean {
     }
     
     public int getId() {
-        return this.id.intValue();
+        if (this.id != null) {
+            return this.id.intValue();
+        } else {
+            return -1;
+        }
+        
     }
 
     public void setId(int id) {
@@ -400,7 +405,10 @@ public class MatchRecordBean {
     }
 
     public int getTeamId() {
-        return this.teamId.intValue();
+        if (this.teamId != null) {
+            return this.teamId.intValue();
+        }
+        return -1;
     }
 
     public void setTeamId(int teamId) {
@@ -408,7 +416,10 @@ public class MatchRecordBean {
     }
 
     public int getMatchId() {
-        return this.matchId.intValue();
+        if (this.matchId != null) {
+            return this.matchId.intValue();
+        }
+        return -1;
     }
 
     public void setMatchId(int matchId) {
@@ -428,7 +439,10 @@ public class MatchRecordBean {
     }
 
     public int getAutonTop() {
-        return this.autonTop.intValue();
+        if (this.autonTop != null) {
+            return this.autonTop.intValue();
+        }
+        return -1;
     }
 
     public void setAutonTop(int autonTop) {
@@ -436,7 +450,10 @@ public class MatchRecordBean {
     }
 
     public int getAutonMiddle() {
-        return this.autonMiddle.intValue();
+        if (this.autonMiddle != null) {
+            return this.autonMiddle.intValue();
+        }
+        return -1;
     }
 
     public void setAutonMiddle(int autonMiddle) {
@@ -444,7 +461,10 @@ public class MatchRecordBean {
     }
 
     public int getAutonBottom() {
-        return this.autonBottom.intValue();
+        if (this.autonBottom != null) {
+            return this.autonBottom.intValue();
+        }
+        return -1;
     }
 
     public void setAutonBottom(int autonBottom) {
@@ -452,7 +472,10 @@ public class MatchRecordBean {
     }
 
     public int getTeleopTop() {
-        return this.teleopTop.intValue();
+        if (this.teleopTop != null) {
+            return this.teleopTop.intValue();
+        }
+        return -1;
     }
 
     public void setTeleopTop(int teleopTop) {
@@ -460,7 +483,10 @@ public class MatchRecordBean {
     }
 
     public int getTeleopMiddle() {
-        return this.teleopMiddle.intValue();
+        if (this.teleopMiddle != null) {
+            return this.teleopMiddle.intValue();
+        }
+        return -1;
     }
 
     public void setTeleopMiddle(int teleopMiddle) {
@@ -468,7 +494,10 @@ public class MatchRecordBean {
     }
 
     public int getTeleopBottom() {
-        return this.teleopBottom.intValue();
+        if (this.teleopBottom != null) {
+            return this.teleopBottom.intValue();
+        }
+        return -1;
     }
 
     public void setTeleopBottom(int teleopBottom) {
@@ -476,7 +505,10 @@ public class MatchRecordBean {
     }
 
     public int getTeleopPyramid() {
-        return this.teleopPyramid.intValue();
+        if (this.teleopPyramid != null) {
+            return this.teleopPyramid.intValue();
+        }
+        return -1;
     }
 
     public void setTeleopPyramid(int teleopPyramid) {
@@ -484,7 +516,10 @@ public class MatchRecordBean {
     }
 
     public int getPyramidLevel() {
-        return this.pyramidLevel.intValue();
+        if (this.pyramidLevel != null) {
+            return this.pyramidLevel.intValue();
+        }
+        return -1;
     }
 
     public void setPyramidLevel(int pyramidLevel) {
@@ -504,7 +539,10 @@ public class MatchRecordBean {
     }
 
     public int getConfidence() {
-        return this.confidence.intValue();
+        if (this.confidence != null) {
+            return this.confidence.intValue();
+        }
+        return -1;
     }
 
     public void setConfidence(int confidence) {
@@ -512,7 +550,10 @@ public class MatchRecordBean {
     }
 
     public int getAbility() {
-        return this.ability.intValue();
+        if (this.ability != null) {
+            return this.ability.intValue();
+        }
+        return -1;
     }
 
     public void setAbility(int ability) {
@@ -520,7 +561,10 @@ public class MatchRecordBean {
     }
 
     public boolean getFouls() {
-        return this.fouls.booleanValue();
+        if (this.fouls != null) {
+            return this.fouls.booleanValue();
+        }
+        return false;
     }
 
     public void setFouls(boolean fouls) {
@@ -528,7 +572,10 @@ public class MatchRecordBean {
     }
 
     public boolean getTechnicalFouls() {
-        return this.technicalFouls.booleanValue();
+        if (this.technicalFouls != null) {
+            return this.technicalFouls.booleanValue();
+        }
+        return false;
     }
 
     public void setTechnicalFouls(boolean technicalFouls) {
@@ -548,7 +595,10 @@ public class MatchRecordBean {
     }
     
     public int getEventId() {
-        return this.eventId.intValue();
+        if (this.eventId != null) {
+            return this.eventId.intValue();
+        }
+        return -1;
     }
     
     public void setEventId(int id) {

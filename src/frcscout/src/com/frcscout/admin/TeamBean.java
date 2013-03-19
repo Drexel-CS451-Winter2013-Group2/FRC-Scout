@@ -46,7 +46,7 @@ public class TeamBean {
                     setName(rs.getString("name"));
                     setLocation(rs.getString("location"));
                 } else {
-                    System.out.println("team number " + this.id.toString() + " not found");
+                    System.out.println("team number " + id.toString() + " not found");
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
