@@ -61,7 +61,7 @@ public class UserAccountBean {
                     setFirstName(rs.getString("first_name"));
                     setLastName(rs.getString("last_name"));
                 } else {
-                    System.out.println("user " + this.email.toString() + " not found");
+                    System.out.println("user " + id.toString() + " not found");
                 }
                 st = conn.prepareStatement("SELECT * FROM user_roles WHERE email = '" + email + "'");
                 rs = st.executeQuery();
