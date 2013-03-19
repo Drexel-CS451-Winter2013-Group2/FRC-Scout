@@ -31,7 +31,8 @@ function getContentItems(){
             store: Ext.create('Ext.data.Store', {
                 fields: ['id', 'name', 'location'],
                 data: teamJSON
-            })
+            }),
+            allowBlank: false
         }, {
             xtype: 'button',
             text: 'Add Team',
@@ -54,14 +55,16 @@ function getContentItems(){
             store: Ext.create('Ext.data.Store', {
                 fields: ['id', 'name', 'location', 'start_date', 'end_date'],
                 data: eventJSON
-            })
+            }),
+            allowBlank: false
         }, {
             xtype: 'textfield', //TODO should be by event / match
             name: 'matchId',
             value: matchId,
             fieldLabel: 'Match Number:',
             regex: /^[0-9]+$/,
-            regexText:'Match number must be an integer'
+            regexText:'Match number must be an integer',
+            allowBlank: false
         }, {
             xtype: 'radiogroup',
             fieldLabel: 'Color',
