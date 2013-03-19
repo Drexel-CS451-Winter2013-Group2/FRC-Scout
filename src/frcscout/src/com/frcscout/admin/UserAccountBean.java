@@ -164,7 +164,7 @@ public class UserAccountBean {
                 }
             }
         } else {
-            System.out.println("Unable to update user because email is null");
+            System.out.println("Unable to update user because id is null");
         }
     }
     
