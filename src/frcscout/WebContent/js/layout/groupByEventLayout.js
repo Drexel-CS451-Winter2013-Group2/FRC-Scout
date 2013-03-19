@@ -34,7 +34,7 @@
         return store1;
     }
     
-    function getTeamMatchStore() {
+    function getTeamDataStore() {
         store1 = Ext.create('Ext.data.JsonStore', {
             fields: ['id', 'total_points', 'autonomous', 'teleop', 'climb'],
             data: teamDataJSON
@@ -60,12 +60,15 @@ function getGroupByEventItems() {
         displayField: 'name',
         valueField: 'id',
         listeners: {
-            select: function( combo, records, eOpts){ window.location = "/frcscout/index.jsp?event=" + records[0].data.id; 
+            select: function( combo, records, eOpts){ 
+                var x = Ext.getCmp('eventTab').items.indexOf(Ext.getCmp('eventTab').getActiveTab());
+                window.location = "/frcscout/index.jsp?event=" + records[0].data.id + '&eventtab=' + x; 
             },
         }
     }, {
         xtype: 'tabpanel',
-        activeTab: 0,
+        activeTab: parseInt(getURLParameter('eventtab')),
+        id: 'eventTab',
         tabPosition: 'top',
         items: [{
             title: 'Overview',
@@ -181,7 +184,7 @@ function getViewMatchItems() {
                     text: 'Search',
                     handler: function() {
                         this.up('form').getForm().isValid();
-                        window.location = '/frcscout/index.jsp?match=' + this.up('form').down('#matchSearchBox').value;
+                        window.location = '/frcscout/index.jsp?match=' + this.up('form').down('#matchSearchBox').value + '&eventtab=1';
                     }
                 }],
                 margin: '10 0 10 120'
@@ -267,7 +270,7 @@ function getViewTeamItems() {
                     text: 'Search',
                     handler: function() {
                         this.up('form').getForm().isValid();
-                        window.location = '/frcscout/index.jsp?team=' + this.up('form').down('#teamSearchBox').value;
+                        window.location = '/frcscout/index.jsp?team=' + this.up('form').down('#teamSearchBox').value + '&eventtab=2';
                     }
                 }],
                 margin: '10 0 10 120'
@@ -276,7 +279,7 @@ function getViewTeamItems() {
             xtype: 'gridpanel',
             title: 'Match Records',
             id: 'teamMatchGrid',
-            store: getTeamMatchStore(),
+            store: getTeamDataStore(),
             columns: [
                 { header: 'Match #',  dataIndex: 'id', flex: 1},
                 { header: 'Auton. Points', dataIndex: 'autonomous' },
@@ -303,7 +306,7 @@ function getViewTeamItems() {
                 width: 500,
                 height: 300,
                 margin: 10,
-                store: getTeamMatchStore(),
+                store: getTeamDataStore(),
                 legend: {
                     position: 'bottom'
                 },
