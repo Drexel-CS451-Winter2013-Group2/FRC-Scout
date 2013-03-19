@@ -9,8 +9,7 @@
     
     function getRedAllianceStore() {
         store1 = Ext.create('Ext.data.JsonStore', {
-            fields: ['id', 'total_points', 'autonomous', 'teleop', 'climb'],
-            sorters: ['id', 'total_points'],
+            fields: ['id', 'team_id', 'total_points', 'autonomous', 'teleop', 'climb'],
             data: redTeamTableJSON
         });
         return store1;
@@ -18,8 +17,7 @@
     
     function getBlueAllianceStore() {
         store1 = Ext.create('Ext.data.JsonStore', {
-            fields: ['id', 'total_points', 'autonomous', 'teleop', 'climb'],
-            sorters: ['id', 'total_points'],
+            fields: ['id', 'team_id', 'total_points', 'autonomous', 'teleop', 'climb'],
             data: blueTeamTableJSON
         });
         return store1;
@@ -36,7 +34,7 @@
     
     function getTeamDataStore() {
         store1 = Ext.create('Ext.data.JsonStore', {
-            fields: ['id', 'total_points', 'autonomous', 'teleop', 'climb'],
+            fields: ['id', 'match_id', 'total_points', 'autonomous', 'teleop', 'climb'],
             data: teamDataJSON
         });
         return store1;
@@ -196,22 +194,7 @@ function getViewMatchItems() {
             id: 'redAllianceGrid',
             store: getRedAllianceStore(),
             columns: [
-                { header: 'Team #',  dataIndex: 'id', flex: 1},
-                { header: 'Auton. Points', dataIndex: 'autonomous' },
-                { header: 'Teleop Points', dataIndex: 'teleop'},
-                { header: 'Climb Points', dataIndex: 'climb'},
-                { header: 'Total Points', dataIndex: 'total_points'}
-            ],
-            width: 500,
-            margin: 10
-        }, {
-            xtype: 'gridpanel',
-            defaultType: 'container',
-            title: 'Blue Alliance',
-            id: 'blueAllianceGrid',
-            store: getBlueAllianceStore(),
-            columns: [
-                { header: 'Team #',  dataIndex: 'id', flex: 1},
+                { header: 'Team #',  dataIndex: 'team_id', flex: 1},
                 { header: 'Auton. Points', dataIndex: 'autonomous' },
                 { header: 'Teleop Points', dataIndex: 'teleop'},
                 { header: 'Climb Points', dataIndex: 'climb'},
@@ -223,7 +206,31 @@ function getViewMatchItems() {
             xtype: 'button',
             text: 'View Match Record',
             handler: function() {
-                alert('This button brings up a detailed view for the selected match record.');
+                var a = Ext.getCmp('redAllianceGrid').getSelectionModel().getSelection()[0].data.id;
+                window.location="/frcscout/viewMatchRecord.jsp?id=" + a + "&return=index.jsp?eventtab=1";
+            },
+            margin: '0 0 10 400'
+        }, {
+            xtype: 'gridpanel',
+            defaultType: 'container',
+            title: 'Blue Alliance',
+            id: 'blueAllianceGrid',
+            store: getBlueAllianceStore(),
+            columns: [
+                { header: 'Team #',  dataIndex: 'team_id', flex: 1},
+                { header: 'Auton. Points', dataIndex: 'autonomous' },
+                { header: 'Teleop Points', dataIndex: 'teleop'},
+                { header: 'Climb Points', dataIndex: 'climb'},
+                { header: 'Total Points', dataIndex: 'total_points'}
+            ],
+            width: 500,
+            margin: 10
+        }, {
+            xtype: 'button',
+            text: 'View Match Record',
+            handler: function() {
+                var a = Ext.getCmp('blueAllianceGrid').getSelectionModel().getSelection()[0].data.id;
+                window.location="/frcscout/viewMatchRecord.jsp?id=" + a + "&return=index.jsp?eventtab=1";
             },
             margin: '0 0 10 400'
         }]
@@ -281,7 +288,7 @@ function getViewTeamItems() {
             id: 'teamMatchGrid',
             store: getTeamDataStore(),
             columns: [
-                { header: 'Match #',  dataIndex: 'id', flex: 1},
+                { header: 'Match #',  dataIndex: 'match_id', flex: 1},
                 { header: 'Auton. Points', dataIndex: 'autonomous' },
                 { header: 'Teleop Points', dataIndex: 'teleop'},
                 { header: 'Climb Points', dataIndex: 'climb'},
@@ -293,7 +300,8 @@ function getViewTeamItems() {
             xtype: 'button',
             text: 'View Match Record',
             handler: function() {
-                alert('This will bring up a detailed view for the selected match record.');
+                var a = Ext.getCmp('teamMatchGrid').getSelectionModel().getSelection()[0].data.id;
+                window.location="/frcscout/viewMatchRecord.jsp?id=" + a + "&return=index.jsp?eventtab=2";
             },
             margin: '10 0 0 400'
         }, {
