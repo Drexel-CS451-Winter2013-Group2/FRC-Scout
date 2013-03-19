@@ -34,7 +34,7 @@
         return store1;
     }
     
-    function getTeamMatchStore() {
+    function getTeamDataStore() {
         store1 = Ext.create('Ext.data.JsonStore', {
             fields: ['id', 'total_points', 'autonomous', 'teleop', 'climb'],
             data: teamDataJSON
@@ -279,7 +279,7 @@ function getViewTeamItems() {
             xtype: 'gridpanel',
             title: 'Match Records',
             id: 'teamMatchGrid',
-            store: getTeamMatchStore(),
+            store: getTeamDataStore(),
             columns: [
                 { header: 'Match #',  dataIndex: 'id', flex: 1},
                 { header: 'Auton. Points', dataIndex: 'autonomous' },
@@ -306,7 +306,7 @@ function getViewTeamItems() {
                 width: 500,
                 height: 300,
                 margin: 10,
-                store: getTeamMatchStore(),
+                store: getTeamDataStore(),
                 legend: {
                     position: 'bottom'
                 },
