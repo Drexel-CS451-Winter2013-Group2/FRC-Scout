@@ -23,15 +23,23 @@ function getContentItems(){
             inputType: 'password',
             name: 'password',
             fieldLabel: 'Password:',
-            allowBlank: false
+            allowBlank: false,
+            minLength: 6,
+            maxLength: 30,
         }, {
             xtype: 'textfield',
             name: 'firstName',
-            fieldLabel: 'First Name:'
+            fieldLabel: 'First Name:',
+            allowBlank: false,
+            minLength: 1,
+            maxLength: 30,
         }, {
             xtype: 'textfield',
             name: 'lastName',
-            fieldLabel: 'Last Name:'
+            fieldLabel: 'Last Name:',
+            allowBlank: false,
+            minLength: 1,
+            maxLength: 30,
         }, {  
             xtype: 'fieldcontainer',
             fieldLabel : 'Role',
