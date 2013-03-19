@@ -583,7 +583,11 @@ public class MatchRecordBean {
     }
 
     public String getComments() {
-        return this.comments;
+        if (StringUtil.isBlank(comments)) {
+            return "";
+        } else {
+            return this.comments;
+        }
     }
 
     public void setComments(String comments) {
