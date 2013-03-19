@@ -17,10 +17,22 @@
 <jsp:setProperty name="MatchRecordBean" property="playStyle" value="${param.playStyle}"/>
 <jsp:setProperty name="MatchRecordBean" property="confidence" value="${param.confidence}"/>
 <jsp:setProperty name="MatchRecordBean" property="ability" value="${param.ability}"/>
-<jsp:setProperty name="MatchRecordBean" property="fouls" value="${param.fouls}"/>
-<jsp:setProperty name="MatchRecordBean" property="technicalFouls" value="${param.technicalFouls}"/>
 <jsp:setProperty name="MatchRecordBean" property="comments" value="${param.comments}"/>
 <jsp:setProperty name="MatchRecordBean" property="path" value="${param.path}"/>
+
+<c:if test="${param.fouls =='on'}">
+    <jsp:setProperty name="MatchRecordBean" property="fouls" value="true"/>
+</c:if>
+<c:if test="${param.fouls !='on'}">
+    <jsp:setProperty name="MatchRecordBean" property="fouls" value="false"/>
+</c:if>
+<c:if test="${param.technicalFouls =='on'}">
+    <jsp:setProperty name="MatchRecordBean" property="technicalFouls" value="true"/>
+</c:if>
+<c:if test="${param.technicalFouls !='on'}">
+    <jsp:setProperty name="MatchRecordBean" property="technicalFouls" value="false"/>
+</c:if>
+
 <%MatchRecordBean.insertMatchRecord();%> 
 
 <%response.sendRedirect("/frcscout/scout/scout.jsp"); %>
