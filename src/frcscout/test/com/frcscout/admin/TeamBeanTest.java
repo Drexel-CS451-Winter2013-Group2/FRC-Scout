@@ -20,25 +20,25 @@ import static org.junit.Assert.fail;
 
 public class TeamBeanTest {
 
-	@Test
+    @Test
     public void loadTeam()
     {
-		Connection conn = null;
+        Connection conn = null;
         Statement sts = null;
         PreparedStatement st = null;
         String q = "INSERT INTO team SET id = ?, name = ?";
         int testID = 0;
         String testName = "testName";
         try {
-        	DBConnection dbconn = new TestMySQLConnection();
-			conn = ManageTestMySQLDatabase.createConnection();
-			assertTrue(ManageTestMySQLDatabase.createDatabase(conn));
-			sts = conn.createStatement();
-			sts.execute("use frcscout_test");
-			st = conn.prepareStatement(q, PreparedStatement.RETURN_GENERATED_KEYS);
-			st.setInt(1, testID);
-			st.setString(2, testName);
-			st.executeUpdate();
+            DBConnection dbconn = new TestMySQLConnection();
+            conn = ManageTestMySQLDatabase.createConnection();
+            assertTrue(ManageTestMySQLDatabase.createDatabase(conn));
+            sts = conn.createStatement();
+            sts.execute("use frcscout_test");
+            st = conn.prepareStatement(q);
+            st.setInt(1, testID);
+            st.setString(2, testName);
+            st.executeUpdate();
             conn.commit();
             
             TeamBean team = new TeamBean(dbconn);
@@ -46,7 +46,7 @@ public class TeamBeanTest {
             assertEquals(team.getId(), testID);
             assertEquals(team.getName(), testName);
         } catch (Exception e) {
-        	e.printStackTrace();
+            e.printStackTrace();
             fail();
         } finally {
             try {
@@ -59,52 +59,12 @@ public class TeamBeanTest {
             }
         }
     }
-
-    /*
-     * @Test
-    public void loadTeams()
-    {
-    	Connection conn = null;
-        Statement st = null;
-        ResultSet rs = null;
-        String testName = "testName";
-        String testLocation = "testLocation";
-        try {
-        	DBConnection dbconn = new TestMySQLConnection();
-            conn = ManageTestMySQLDatabase.createConnection();
-            assertTrue(ManageTestMySQLDatabase.createDatabase(conn));
-            st = conn.createStatement();
-            st.execute("use frcscout_test");
-            TeamBean team = new TeamBean(dbconn);
-            team.setName(testName);
-            team.setLocation(testLocation);
-            team.setId(0);
-            team.loadTeams();
-            rs = st.executeQuery("select * from teams limit 1");
-            assertTrue(rs.next());
-            assertEquals(rs.getString("name"), testName);
-            assertEquals(rs.getString("location"), testLocation);
-            assertEquals(rs.getInt(0), 0);
-        } catch (Exception e) {
-            fail();
-        } finally {
-            try {
-                ManageTestMySQLDatabase.deleteDatabase(conn);
-                conn.close();
-                st.close();
-                rs.close();
-            } catch (SQLException a) {
-                a.printStackTrace();
-            }
-        }
-    }
-    */
     
-	@Test
+    @Test
     public void updateTeam()
     {
-    	Connection conn = null;
-    	Statement sts = null;
+        Connection conn = null;
+        Statement sts = null;
         PreparedStatement st = null;
         ResultSet rs = null;
         String q = "INSERT INTO team SET id= ?, name = ?, location = ?";
@@ -115,31 +75,30 @@ public class TeamBeanTest {
         String newName = "newTestName";
         String newLoc = "newTestLoc";
         try {
-        	DBConnection dbconn = new TestMySQLConnection();
-			conn = ManageTestMySQLDatabase.createConnection();
-			assertTrue(ManageTestMySQLDatabase.createDatabase(conn));
-			sts = conn.createStatement();
-			sts.execute("use frcscout_test");
-			st = conn.prepareStatement(q, PreparedStatement.RETURN_GENERATED_KEYS);
-			st.setInt(1, expectedID);
-			st.setString(2, expectedName);
-			st.setString(3, expectedLoc);
-			st.executeUpdate();
-			rs = st.getGeneratedKeys();
-			//assertTrue(rs.next());
-			conn.commit();
-			 
+            DBConnection dbconn = new TestMySQLConnection();
+            conn = ManageTestMySQLDatabase.createConnection();
+            assertTrue(ManageTestMySQLDatabase.createDatabase(conn));
+            sts = conn.createStatement();
+            sts.execute("use frcscout_test");
+            st = conn.prepareStatement(q);
+            st.setInt(1, expectedID);
+            st.setString(2, expectedName);
+            st.setString(3, expectedLoc);
+            st.executeUpdate();
+            conn.commit();
+             
             TeamBean team = new TeamBean(dbconn);
-            team.setId(newID);
+            team.setId(expectedID);
             team.setName(newName);
             team.setLocation(newLoc);
             team.updateTeam(Integer.toString(newID));
             rs = st.executeQuery("select * from team limit 1");
             assertTrue(rs.next());
-            assertEquals(team.getId(), newID);
-            assertEquals(team.getName(), newName);
+            assertEquals(rs.getInt("id"), newID);
+            assertEquals(rs.getString("name"), newName);
+            assertEquals(rs.getString("location"), newLoc);
         } catch (Exception e) {
-        	e.printStackTrace();
+            e.printStackTrace();
             fail();
         } finally {
             try {
@@ -154,22 +113,22 @@ public class TeamBeanTest {
         }
     }
     
-	@Test
+    @Test
     public void insertTeam()
     {
-    	Connection conn = null;
+        Connection conn = null;
         Statement st = null;
         ResultSet rs = null;
         int expectedID = 0;
         String expectedName = "testname";
         String expectedLoc = "testLoc";
         try {
-        	DBConnection dbconn = new TestMySQLConnection();
-			conn = ManageTestMySQLDatabase.createConnection();
-			assertTrue(ManageTestMySQLDatabase.createDatabase(conn));
-			st = conn.createStatement();
-			st.execute("use frcscout_test");
-			
+            DBConnection dbconn = new TestMySQLConnection();
+            conn = ManageTestMySQLDatabase.createConnection();
+            assertTrue(ManageTestMySQLDatabase.createDatabase(conn));
+            st = conn.createStatement();
+            st.execute("use frcscout_test");
+            
             TeamBean team = new TeamBean(dbconn);
             team.setId(expectedID);
             team.setName(expectedName);
@@ -195,38 +154,35 @@ public class TeamBeanTest {
         }
     }
     
-	@Test
+    @Test
     public void deleteTeam()
     {
-		Connection conn = null;
-		Statement sts = null;
+        Connection conn = null;
+        Statement sts = null;
         PreparedStatement st = null;
         ResultSet rs = null;
         String q = "INSERT INTO team SET id = ?, name = ?";
         int expectedID = 0;
         String expectedName = "testname";
         try {
-        	DBConnection dbconn = new TestMySQLConnection();
-			conn = ManageTestMySQLDatabase.createConnection();
-			assertTrue(ManageTestMySQLDatabase.createDatabase(conn));
-			sts = conn.createStatement();
-			sts.execute("use frcscout_test");
-			st = conn.prepareStatement(q, PreparedStatement.RETURN_GENERATED_KEYS);
-			st.setInt(1, expectedID);
-			st.setString(2, expectedName);
-			st.executeUpdate();
-			rs = st.getGeneratedKeys();
-			//assertTrue(rs.next());
+            DBConnection dbconn = new TestMySQLConnection();
+            conn = ManageTestMySQLDatabase.createConnection();
+            assertTrue(ManageTestMySQLDatabase.createDatabase(conn));
+            sts = conn.createStatement();
+            sts.execute("use frcscout_test");
+            st = conn.prepareStatement(q);
+            st.setInt(1, expectedID);
+            st.setString(2, expectedName);
+            st.executeUpdate();
             conn.commit();
-			
+            
             TeamBean team = new TeamBean(dbconn);
-            team.setName(expectedName);
             team.setId(expectedID);
             team.deleteTeam();
             rs = st.executeQuery("select * from team limit 1");
             assertFalse(rs.next());
         } catch (Exception e) {
-        	e.printStackTrace();
+            e.printStackTrace();
             fail();
         } finally {
             try {

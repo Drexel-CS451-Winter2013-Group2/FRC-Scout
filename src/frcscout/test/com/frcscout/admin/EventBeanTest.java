@@ -16,9 +16,9 @@ import static org.junit.Assert.*;
 
 public class EventBeanTest {
 
-	@Test
-	public void loadEvent() 
-	{
+    @Test
+    public void loadEvent() 
+    {
         Connection conn = null;
         Statement sts = null;
         PreparedStatement st = null;
@@ -27,18 +27,18 @@ public class EventBeanTest {
         String testName = "testName";
         String testLocation = "testLocation";
         try {
-        	DBConnection dbconn = new TestMySQLConnection();
-			conn = ManageTestMySQLDatabase.createConnection();
-			assertTrue(ManageTestMySQLDatabase.createDatabase(conn));
-			sts = conn.createStatement();
-			sts.execute("use frcscout_test");
-			st = conn.prepareStatement(q, PreparedStatement.RETURN_GENERATED_KEYS);
-			st.setString(1, testName);
-			st.setString(2, testLocation);
-			st.executeUpdate();
-			rs = st.getGeneratedKeys();
-			assertTrue(rs.next());
-            conn.commit();
+            DBConnection dbconn = new TestMySQLConnection();
+            conn = ManageTestMySQLDatabase.createConnection();
+            assertTrue(ManageTestMySQLDatabase.createDatabase(conn));
+            sts = conn.createStatement();
+            sts.execute("use frcscout_test");
+            st = conn.prepareStatement(q, PreparedStatement.RETURN_GENERATED_KEYS);
+            st.setString(1, testName);
+            st.setString(2, testLocation);
+            st.executeUpdate();
+            rs = st.getGeneratedKeys();
+            assertTrue(rs.next());            conn.commit();
+
             
             EventBean event = new EventBean(dbconn);
             int x = rs.getInt(1);
@@ -46,7 +46,7 @@ public class EventBeanTest {
             assertEquals(event.getName(), testName);
             assertEquals(event.getLocation(), testLocation);
         } catch (Exception e) {
-        	e.printStackTrace();
+            e.printStackTrace();
             fail();
         } finally {
             try {
@@ -60,50 +60,10 @@ public class EventBeanTest {
             }
         }
     }
-	
-	/*
-	 * @Test
-	public void loadEvents()
-	{
-		Connection conn = null;
-        Statement st = null;
-        ResultSet rs = null;
-        String testName = "testName";
-        String testLocation = "testLocation";
-        try {
-        	DBConnection dbconn = new TestMySQLConnection();
-            conn = ManageTestMySQLDatabase.createConnection();
-            assertTrue(ManageTestMySQLDatabase.createDatabase(conn));
-            st = conn.createStatement();
-            st.execute("use frcscout_test");
-            EventBean event = new EventBean(dbconn);
-            event.setName(testName);
-            event.setLocation(testLocation);
-            event.setId(0);
-            event.loadEvents();
-            rs = st.executeQuery("select * from events limit 1");
-            assertTrue(rs.next());
-            assertEquals(rs.getString("name"), testName);
-            assertEquals(rs.getString("location"), testLocation);
-            assertEquals(rs.getInt(0), 0);
-        } catch (Exception e) {
-            fail();
-        } finally {
-            try {
-                ManageTestMySQLDatabase.deleteDatabase(conn);
-                conn.close();
-                st.close();
-                rs.close();
-            } catch (SQLException a) {
-                a.printStackTrace();
-            }
-        }
-	}
-	*/
-	
-	@Test
-	public void updateEvent()
-	{
+    
+    @Test
+    public void updateEvent()
+    {
         Connection conn = null;
         Statement sts = null;
         PreparedStatement st = null;
@@ -114,18 +74,17 @@ public class EventBeanTest {
         String newName = "newTestName";
         String newLocation = "newTestLocation";
         try {
-        	DBConnection dbconn = new TestMySQLConnection();
-			conn = ManageTestMySQLDatabase.createConnection();
-			assertTrue(ManageTestMySQLDatabase.createDatabase(conn));
-			sts = conn.createStatement();
-			sts.execute("use frcscout_test");
-			st = conn.prepareStatement(q, PreparedStatement.RETURN_GENERATED_KEYS);
-			st.setString(1, expectedName);
-			st.setString(2, expectedLocation);
-			st.executeUpdate();
-			rs = st.getGeneratedKeys();
-			assertTrue(rs.next());
-            conn.commit();
+            DBConnection dbconn = new TestMySQLConnection();
+            conn = ManageTestMySQLDatabase.createConnection();
+            assertTrue(ManageTestMySQLDatabase.createDatabase(conn));
+            sts = conn.createStatement();
+            sts.execute("use frcscout_test");
+            st = conn.prepareStatement(q, PreparedStatement.RETURN_GENERATED_KEYS);
+            st.setString(1, expectedName);
+            st.setString(2, expectedLocation);
+            st.executeUpdate();
+            rs = st.getGeneratedKeys();
+            assertTrue(rs.next());            conn.commit();
             
             EventBean event = new EventBean(dbconn);
             int x = rs.getInt(1);
@@ -150,8 +109,8 @@ public class EventBeanTest {
                 a.printStackTrace();
             }
         }
-	}
-	
+    }
+    
     @Test
     public void insertEvent(){
         Connection conn = null;
@@ -191,25 +150,25 @@ public class EventBeanTest {
     @Test
     public void deleteEvent()
     {
-    	Connection conn = null;
-    	Statement sts = null;
+        Connection conn = null;
+        Statement sts = null;
         PreparedStatement st = null;
         ResultSet rs = null;
         String q = "INSERT INTO events SET name = ?, location = ?";
         String expectedName = "testname";
         String expectedLocation = "testloc";
         try {
-        	DBConnection dbconn = new TestMySQLConnection();
-			conn = ManageTestMySQLDatabase.createConnection();
-			assertTrue(ManageTestMySQLDatabase.createDatabase(conn));
-			sts = conn.createStatement();
-			sts.execute("use frcscout_test");
-			st = conn.prepareStatement(q, PreparedStatement.RETURN_GENERATED_KEYS);
-			st.setString(1, expectedName);
-			st.setString(2, expectedLocation);
-			st.executeUpdate();
-			rs = st.getGeneratedKeys();
-			assertTrue(rs.next());
+            DBConnection dbconn = new TestMySQLConnection();
+            conn = ManageTestMySQLDatabase.createConnection();
+            assertTrue(ManageTestMySQLDatabase.createDatabase(conn));
+            sts = conn.createStatement();
+            sts.execute("use frcscout_test");
+            st = conn.prepareStatement(q, PreparedStatement.RETURN_GENERATED_KEYS);
+            st.setString(1, expectedName);
+            st.setString(2, expectedLocation);
+            st.executeUpdate();
+            rs = st.getGeneratedKeys();
+            assertTrue(rs.next());
             conn.commit();
             
             EventBean event = new EventBean(dbconn);
