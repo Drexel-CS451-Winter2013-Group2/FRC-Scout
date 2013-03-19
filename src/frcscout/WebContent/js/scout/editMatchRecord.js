@@ -5,7 +5,7 @@ function getContentItems(){
         width: 340,
         frame: true,
         bodyPadding: 5,
-        url: 'insertMatchRecord.jsp',
+        url: 'updateMatchRecord.jsp',
         standardSubmit: true,
         fieldDefaults: {
             labelAlign: 'left',
@@ -13,6 +13,10 @@ function getContentItems(){
             anchor: '100%'
         },
         items: [{
+            xtype: 'hiddenfield',
+            name: 'id',
+            value: getURLParameter("id")
+        },{
             xtype: 'combo',
             mode: 'local',
             triggerAction: 'all',
@@ -22,6 +26,7 @@ function getContentItems(){
             name: 'teamId',
             displayField: 'id',
             valueField: 'id',
+            value: teamId,
             queryMode: 'local',
             store: Ext.create('Ext.data.Store', {
                 fields: ['id', 'name', 'location'],
@@ -43,6 +48,7 @@ function getContentItems(){
             fieldLabel: 'Event Name:',
             name: 'eventId',
             displayField: 'name',
+            value: eventId,
             valueField: 'id',
             queryMode: 'local',
             store: Ext.create('Ext.data.Store', {
@@ -52,6 +58,7 @@ function getContentItems(){
         }, {
             xtype: 'textfield', //TODO should be by event / match
             name: 'matchId',
+            value: matchId,
             fieldLabel: 'Match Number:',
             regex: /^[0-9]+$/,
             regexText:'Match number must be an integer'
@@ -59,97 +66,100 @@ function getContentItems(){
             xtype: 'radiogroup',
             fieldLabel: 'Color',
             items: [{
-                boxLabel: 'Red', name: 'color', inputValue: 'red', checked: true
+                boxLabel: 'Red', name: 'color', inputValue: 'red', checked: (color == 'red')
             }, {
-                boxLabel: 'Blue', name: 'color', inputValue: 'blue'
+                boxLabel: 'Blue', name: 'color', inputValue: 'blue', checked: (color == 'blue')
             }]
         }, {
             xtype: 'numberfield', 
             name: 'autonTop',
-            value: 0,
+            value: autonTop,
             minValue: 0,
             fieldLabel: 'Auton Top:',
         }, {
             xtype: 'numberfield', 
             name: 'autonMiddle',
             minValue: 0,
-            value: 0,
+            value: autonMiddle,
             fieldLabel: 'Auton Middle:',
         }, {
             xtype: 'numberfield', 
             name: 'autonBottom',
             minValue: 0,
-            value: 0,
+            value: autonBottom,
             fieldLabel: 'Auton Bottom:',
         }, {
             xtype: 'numberfield', 
             name: 'teleopTop',
             minValue: 0,
-            value: 0,
+            value: teleopTop,
             fieldLabel: 'Teleop Top:',
         }, {
             xtype: 'numberfield', 
             name: 'teleopMiddle',
             minValue: 0,
-            value: 0,
+            value: teleopMiddle,
             fieldLabel: 'Teleop Middle:',
         }, {
             xtype: 'numberfield', 
             name: 'teleopBottom',
             minValue: 0,
-            value: 0,
+            value: teleopBottom,
             fieldLabel: 'Teleop Bottom:',
         },{
             xtype: 'numberfield', 
             name: 'teleopPyramid',
             minValue: 0,
-            value: 0,
+            value: teleopPyramid,
             fieldLabel: 'Teleop Pyramid:',
         }, {
             xtype: 'radiogroup',
             fieldLabel: 'Pyramid Level',
             items: [{
-                boxLabel: '0', name: 'pyramidLevel', inputValue: '0', checked: true
+                boxLabel: '0', name: 'pyramidLevel', inputValue: '0', checked: (0 == pyramidLevel)
             }, {
-                boxLabel: '1', name: 'pyramidLevel', inputValue: '1'
+                boxLabel: '1', name: 'pyramidLevel', inputValue: '1', checked: (1 == pyramidLevel)
             }, {
-                boxLabel: '2', name: 'pyramidLevel', inputValue: '2'
+                boxLabel: '2', name: 'pyramidLevel', inputValue: '2', checked: (2 == pyramidLevel)
             }, {
-                boxLabel: '3', name: 'pyramidLevel', inputValue: '3'
+                boxLabel: '3', name: 'pyramidLevel', inputValue: '3', checked: (3 == pyramidLevel)
             }]
         },{
             xtype: 'radiogroup', 
             fieldLabel: 'Play Style',
             items: [{
-                boxLabel: 'Offensive', name: 'playStyle', inputValue: 'Offensive', checked: true
+                boxLabel: 'Offensive', name: 'playStyle', inputValue: 'Offensive', checked: ('Offensive' == playStyle)
             }, {
-                boxLabel: 'Defensive', name: 'playStyle', inputValue: 'Defensive'
+                boxLabel: 'Defensive', name: 'playStyle', inputValue: 'Defensive', checked: ('Defensive' == playStyle)
             }]
         },{
             xtype: 'numberfield', 
             name: 'confidence',
             fieldLabel: 'Rating (0 - 10):',
-            value: 0,
+            value: confidence,
             maxValue: 10,
             minValue: 0
         },{
             xtype: 'numberfield', 
             name: 'ability',
             fieldLabel: 'Floor Pickup Ability (0 - 10):',
-            value: 0,
+            value: ability,
             maxValue: 10,
             minValue: 0
         },{
             xtype: 'checkbox', 
             name: 'fouls',
+            checked: fouls,
             fieldLabel: 'Fouls:',
         },{
             xtype: 'checkbox', 
             name: 'technicalFouls',
+            checked: technicalFouls,
             fieldLabel: 'Technical Fouls:',
         },{
             xtype: 'textarea', 
             name: 'comments',
+            value: comments,
             fieldLabel: 'Comments:',
         }/*,{ //TODO
             xtype: 'textarea', 
