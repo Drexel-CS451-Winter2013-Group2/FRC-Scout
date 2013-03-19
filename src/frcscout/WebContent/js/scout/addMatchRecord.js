@@ -71,30 +71,40 @@ function getContentItems(){
             name: 'autonTop',
             value: 0,
             minValue: 0,
+            allowBlank: false,
+            allowDecimals: false,
             fieldLabel: 'Auton Top:',
         }, {
             xtype: 'numberfield', 
             name: 'autonMiddle',
             minValue: 0,
             value: 0,
+            allowBlank: false,
+            allowDecimals: false,
             fieldLabel: 'Auton Middle:',
         }, {
             xtype: 'numberfield', 
             name: 'autonBottom',
             minValue: 0,
             value: 0,
+            allowBlank: false,
+            allowDecimals: false,
             fieldLabel: 'Auton Bottom:',
         }, {
             xtype: 'numberfield', 
             name: 'teleopTop',
             minValue: 0,
             value: 0,
+            allowBlank: false,
+            allowDecimals: false,
             fieldLabel: 'Teleop Top:',
         }, {
             xtype: 'numberfield', 
             name: 'teleopMiddle',
             minValue: 0,
             value: 0,
+            allowBlank: false,
+            allowDecimals: false,
             fieldLabel: 'Teleop Middle:',
         }, {
             xtype: 'numberfield', 
@@ -107,6 +117,8 @@ function getContentItems(){
             name: 'teleopPyramid',
             minValue: 0,
             value: 0,
+            allowBlank: false,
+            allowDecimals: false,
             fieldLabel: 'Teleop Pyramid:',
         }, {
             xtype: 'radiogroup',
@@ -131,16 +143,16 @@ function getContentItems(){
         },{
             xtype: 'numberfield', 
             name: 'confidence',
-            fieldLabel: 'Rating (0 - 10):',
+            fieldLabel: 'Rating (0 - 5):',
             value: 0,
-            maxValue: 10,
+            maxValue: 5,
             minValue: 0
         },{
             xtype: 'numberfield', 
             name: 'ability',
-            fieldLabel: 'Floor Pickup Ability (0 - 10):',
+            fieldLabel: 'Floor Pickup Ability (0 - 5):',
             value: 0,
-            maxValue: 10,
+            maxValue: 5,
             minValue: 0
         },{
             xtype: 'checkbox', 
