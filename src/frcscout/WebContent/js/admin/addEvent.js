@@ -30,6 +30,24 @@ function getContentItems(){
             xtype: 'datefield',
             name: 'endDate',
             fieldLabel: 'End Date:'
+        }, {
+            xtype: 'combo',
+            mode: 'local',
+            value: 'ascent',
+            triggerAction: 'all',
+            forceSelection: true,
+            editable: false,
+            fieldLabel: 'Game:',
+            name: 'game',
+            displayField: 'name',
+            valueField: 'value',
+            queryMode: 'local',
+            store: Ext.create('Ext.data.Store', {
+                fields : ['name', 'value'],
+                data   : [
+                    {name : 'Ultimate Ascent',   value: 'ascent'}
+                ]
+            })
         }],
         buttons: [{
             text: 'Save',
