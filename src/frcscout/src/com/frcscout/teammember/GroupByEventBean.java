@@ -51,6 +51,35 @@ public class GroupByEventBean {
     }
     
     @SuppressWarnings("unchecked")
+    public String loadMatches() {
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        JSONArray json = new JSONArray();
+        try {
+            conn = dbconn.getConnection();
+            st = conn.prepareStatement("SELECT * FROM `match` where event_id = ?");
+            st.setInt(1, this.getSelectedEvent());
+            rs = st.executeQuery();
+            while (rs.next()) {
+                JSONObject o = new JSONObject();
+                o.put("id", rs.getInt("match_number"));
+                json.add(o);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try{
+                conn.close();
+                st.close();
+                rs.close();
+            }catch (SQLException e) {
+                System.out.println("Error closing query");
+            }
+        }
+       return json.toString();
+    }
+    
+    @SuppressWarnings("unchecked")
     public String getOverviewTable() {
         PreparedStatement st = null;
         ResultSet rs = null;

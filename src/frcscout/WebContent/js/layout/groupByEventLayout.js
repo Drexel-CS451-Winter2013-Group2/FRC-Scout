@@ -47,13 +47,21 @@
         });
         return store2;
     }
+    
+    function getEventValue() {
+        if (selectedEvent > 0) 
+        { return selectedEvent;}
+        else {
+            return "";
+        }
+    }
 
 function getGroupByEventItems() {
     return [{
         xtype: 'combobox',
         fieldLabel: 'Select Event',
         store: getEventStore(),
-        value: selectedEvent,
+        value: getEventValue(),
         queryMode: 'local',
         displayField: 'name',
         valueField: 'id',
@@ -61,7 +69,7 @@ function getGroupByEventItems() {
             select: function( combo, records, eOpts){ 
                 var x = Ext.getCmp('eventTab').items.indexOf(Ext.getCmp('eventTab').getActiveTab());
                 window.location = "/frcscout/index.jsp?event=" + records[0].data.id + '&eventtab=' + x; 
-            },
+            }
         }
     }, {
         xtype: 'tabpanel',
@@ -150,6 +158,13 @@ function getMatchTitle() {
     return '<h1>Select match by search</h1>';
 }
 
+function getSelectedMatch() {
+    if (selectedMatch > 0) {
+        return selectedMatch;
+    }
+    return "";
+}
+
 function getViewMatchItems() {
     return [{
         defaultType: 'container',
@@ -171,18 +186,17 @@ function getViewMatchItems() {
                 border: false,
                 layout: 'hbox',
                 items: [{
-                    xtype: 'textfield',
-                    border: false,
-                    name: 'matchSearchBox',
-                    id: 'matchSearchBox',
-                    fieldLabel: 'Match search',
-                    allowBlank: false
-                }, {
-                    xtype: 'button',
-                    text: 'Search',
-                    handler: function() {
-                        this.up('form').getForm().isValid();
-                        window.location = '/frcscout/index.jsp?match=' + this.up('form').down('#matchSearchBox').value + '&eventtab=1';
+                    xtype: 'combobox',
+                    fieldLabel: 'Select Match',
+                    store: getMatchStore(),
+                    value: getSelectedMatch(),
+                    queryMode: 'local',
+                    displayField: 'id',
+                    valueField: 'id',
+                    listeners: {
+                        select: function( combo, records, eOpts){ 
+                            window.location = '/frcscout/index.jsp?match=' + records[0].data.id + '&eventtab=1';
+                        }
                     }
                 }],
                 margin: '10 0 10 120'
@@ -244,6 +258,13 @@ function getTeamTitle() {
     return '<h1>Select team by search</h1>';
 }
 
+function getSelectedTeam() {
+    if (selectedTeam > 0) {
+        return selectedTeam;
+    }
+    return "";
+}
+
 function getViewTeamItems() {
     return [{
         defaultType: 'container',
@@ -266,18 +287,17 @@ function getViewTeamItems() {
                 border: false,
                 layout: 'hbox',
                 items: [{
-                    xtype: 'textfield',
-                    border: false,
-                    name: 'teamSearchBox',
-                    id: 'teamSearchBox',
-                    fieldLabel: 'Team search',
-                    allowBlank: false
-                }, {
-                    xtype: 'button',
-                    text: 'Search',
-                    handler: function() {
-                        this.up('form').getForm().isValid();
-                        window.location = '/frcscout/index.jsp?team=' + this.up('form').down('#teamSearchBox').value + '&eventtab=2';
+                    xtype: 'combobox',
+                    fieldLabel: 'Select Team',
+                    store: getTeamStore(),
+                    value: getSelectedTeam(),
+                    queryMode: 'local',
+                    displayField: 'id',
+                    valueField: 'id',
+                    listeners: {
+                        select: function( combo, records, eOpts){ 
+                            window.location = '/frcscout/index.jsp?team=' + records[0].data.id + '&eventtab=2';
+                        }
                     }
                 }],
                 margin: '10 0 10 120'
