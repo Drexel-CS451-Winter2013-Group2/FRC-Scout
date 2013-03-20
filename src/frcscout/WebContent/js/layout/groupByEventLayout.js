@@ -296,7 +296,7 @@ function getViewTeamItems() {
                     valueField: 'id',
                     listeners: {
                         select: function( combo, records, eOpts){ 
-                            window.location = '/frcscout/index.jsp?team=' + records[0].data.id + '&eventtab=1';
+                            window.location = '/frcscout/index.jsp?team=' + records[0].data.id + '&eventtab=2';
                         }
                     }
                 }],
