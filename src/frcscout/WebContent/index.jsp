@@ -15,6 +15,7 @@
     var selectedTeam = <%=GroupByEventBean.getSelectedTeam() %>;
     var eventJSON = <%=EventBean.loadEvents() %>;
     var teamJSON = <%=TeamBean.loadTeams() %>;
+    var matchJSON = <%=GroupByEventBean.loadMatches() %>;
     var overviewChartJSON = <%=GroupByEventBean.getOverviewChart() %>;
     var overviewTableJSON = <%=GroupByEventBean.getOverviewTable() %>;
     var redTeamTableJSON = <%=GroupByEventBean.getRedTeamTable() %>;

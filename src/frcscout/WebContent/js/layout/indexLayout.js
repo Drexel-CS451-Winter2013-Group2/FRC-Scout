@@ -14,6 +14,14 @@
         return store1;
     }
     
+    function getMatchStore() { 
+        store1 = Ext.create('Ext.data.JsonStore', {
+            fields: ['id'],
+            data: matchJSON
+        });
+        return store1;
+    }
+    
 function getContentItems(){
     return [{
         xtype: 'tabpanel',
