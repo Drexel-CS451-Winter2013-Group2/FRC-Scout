@@ -339,7 +339,7 @@ public class MatchRecordBean {
         JSONArray json = new JSONArray();
         try {
             conn = dbconn.getConnection();
-            st = conn.prepareStatement("SELECT e.name, m.* FROM match_record_2013 m, events e");
+            st = conn.prepareStatement("SELECT e.name, m.* FROM match_record_2013 m, events e WHERE e.id = m.event_id");
             rs = st.executeQuery();
             while (rs.next()) {
                 JSONObject o = new JSONObject();
