@@ -2,10 +2,17 @@
     font-size: 35;
     color: #6895FF;
     padding: 10px;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 .lay-toolbar {
     background: #6895FF;
 }
+
+.bold {
+	font-weight: bold;
+}
+
+.italicized {
+	font-style: italic;
+}
+
