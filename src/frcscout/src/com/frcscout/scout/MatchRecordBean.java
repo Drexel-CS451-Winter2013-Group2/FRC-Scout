@@ -340,7 +340,7 @@ public class MatchRecordBean {
         JSONArray json = new JSONArray();
         try {
             conn = dbconn.getConnection();
-            st = conn.prepareStatement("SELECT * FROM match_record_2013");
+            st = conn.prepareStatement("SELECT e.name, m.* FROM match_record_2013 m, events e");
             rs = st.executeQuery();
             while (rs.next()) {
                 JSONObject o = new JSONObject();
@@ -350,6 +350,7 @@ public class MatchRecordBean {
                 o.put("team_id", rs.getInt("team_id"));
                 o.put("match_id", rs.getInt("match_number"));
                 o.put("event_id", rs.getInt("event_id"));
+                o.put("event_name", rs.getString("name"));
                 o.put("color", rs.getString("color"));
                 o.put("auton_top", rs.getInt("auton_top"));
                 o.put("auton_middle", rs.getInt("auton_middle"));
