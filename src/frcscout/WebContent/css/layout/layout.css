@@ -1,5 +1,9 @@
-.lay-title * {
+.lay-title h1 {
     font-size: 35;
+    color: #6895FF;
+    padding: 10px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .lay-toolbar {
