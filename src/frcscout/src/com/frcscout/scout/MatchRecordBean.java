@@ -66,19 +66,36 @@ public class MatchRecordBean {
     public void deleteMatchRecord() {
         if (id != null) {
             PreparedStatement st = null;
-            String q = "DELETE FROM match_record_2013 WHERE id = ?";
-
+            ResultSet rs = null;
+            String q = "SELECT match_number, event_id FROM match_record_2013 WHERE id = ?";
             try {
                 conn = dbconn.getConnection();
+                conn.setAutoCommit(false);
+                st = conn.prepareStatement(q);
+                st.setInt(1, id);
+                rs = st.executeQuery();
+                q = "DELETE FROM match_record_2013 WHERE id = ?";
                 st = conn.prepareStatement(q);
                 st.setInt(1, this.id.intValue());
                 st.executeUpdate();
+                if (rs.next()) {
+                    int oldEventId = rs.getInt("event_id");
+                    int oldMatchId = rs.getInt("match_number");
+                    deleteMatch(conn, oldEventId, oldMatchId);
+                }
+                conn.commit();
             } catch (SQLException e) {
+                try {
+                    conn.rollback();
+                } catch (SQLException a) {
+                    System.out.println("Unable to roll back transaction");
+                }
                 e.printStackTrace();
             } finally {
                 try {
                     conn.close();
                     st.close();
+                    rs.close();
                 } catch (SQLException e) {
                     System.out.println("Unable to close connection");
                 }
@@ -167,22 +184,60 @@ public class MatchRecordBean {
             }
         }
     }
+    
+    private void deleteMatch(Connection conn, int event, int match) throws SQLException{
+        ResultSet rs = null;
+        String q = "SELECT * from match_record_2013 WHERE match_number = ? AND event_id = ?";
+        PreparedStatement st = null;
+        try {
+            st = conn.prepareStatement(q);
+            st.setInt(1, match);
+            st.setInt(2, event);
+            rs = st.executeQuery();
+            if (!rs.next()) {
+                q = "DELETE FROM `match` WHERE match_number = ? AND event_id = ?";
+                st = conn.prepareStatement(q);
+                st.setInt(1, match);
+                st.setInt(2, event);
+                st.executeUpdate();
+            }
+        } catch (SQLException e) {
+            throw e;
+        } finally {
+            try {
+                st.close();
+                rs.close();
+            } catch (SQLException a) {
+                System.out.println("Unable to close connection");
+            }
+        }
+    }
 
     public void updateMatchRecord() {
         if (id != null) {
             PreparedStatement st = null;
-            String q = "UPDATE match_record_2013 SET " +
-                "user = ?, team_id = ?, match_number = ?, color = ?, " +
-                "auton_top = ?, auton_middle = ?, auton_bottom = ?, " +
-                "teleop_top = ?, teleop_middle = ?, teleop_bottom = ?, " +
-                "teleop_pyramid = ?, pyramid_level = ?, play_style = ?, " +
-                "confidence = ?, ability = ?, fouls = ?, " +
-                "technical_fouls = ?, comments = ?, path = ?, event_id = ? WHERE id = ?;";
-    
+            ResultSet rs = null;
+            String q = "SELECT match_number, event_id FROM match_record_2013 WHERE id = ?";
             try {
                 conn = dbconn.getConnection();
                 conn.setAutoCommit(false);
+                st = conn.prepareStatement(q);
+                st.setInt(1, id);
+                rs = st.executeQuery();
+                int oldEventId = -1;
+                int oldMatchId = -1;
+                if (rs.next()) {
+                    oldEventId = rs.getInt("event_id");
+                    oldMatchId = rs.getInt("match_number");
+                }
                 insertMatch(conn, this.eventId, this.matchId);
+                q = "UPDATE match_record_2013 SET " +
+                        "user = ?, team_id = ?, match_number = ?, color = ?, " +
+                        "auton_top = ?, auton_middle = ?, auton_bottom = ?, " +
+                        "teleop_top = ?, teleop_middle = ?, teleop_bottom = ?, " +
+                        "teleop_pyramid = ?, pyramid_level = ?, play_style = ?, " +
+                        "confidence = ?, ability = ?, fouls = ?, " +
+                        "technical_fouls = ?, comments = ?, path = ?, event_id = ? WHERE id = ?";
                 st = conn.prepareStatement(q);
                 st.setString(1, this.user);
                 st.setInt(2, this.teamId);
@@ -207,6 +262,7 @@ public class MatchRecordBean {
                 st.setInt(21, this.id.intValue());
                 
                 st.executeUpdate();
+                deleteMatch(conn, oldEventId, oldMatchId);
                 conn.commit();
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -215,12 +271,11 @@ public class MatchRecordBean {
                 } catch (SQLException a) {
                     System.out.println("Unable to roll back transaction");
                 }
-              
-                
             } finally {
                 try {
                     conn.close();
                     st.close();
+                    rs.close();
                 } catch (SQLException e) {
                     System.out.println("Unable to close connection");
                 }
