@@ -167,17 +167,19 @@ function getContentItems(){
             xtype: 'checkbox', 
             name: 'fouls',
             checked: fouls,
-            fieldLabel: 'Fouls:',
+            fieldLabel: 'Fouls:'
         },{
             xtype: 'checkbox', 
             name: 'technicalFouls',
             checked: technicalFouls,
-            fieldLabel: 'Technical Fouls:',
+            fieldLabel: 'Technical Fouls:'
         },{
             xtype: 'textarea', 
             name: 'comments',
             value: comments,
             fieldLabel: 'Comments:',
+            maxLength: 500,
+            maxLengthText: 'Must be less than 500 characters'
         }/*,{ //TODO
             xtype: 'textarea', 
             name: 'path',
