@@ -155,7 +155,7 @@ function getMatchTitle() {
     if (selectedMatch > 0) {
         return '<h1>Match ' + selectedMatch + '</h1>';
     }
-    return '<h1>Select match by search</h1>';
+    return '<h1>Select a match</h1>';
 }
 
 function getSelectedMatch() {
@@ -255,7 +255,7 @@ function getTeamTitle() {
     if (selectedTeam > 0) {
         return '<h1>Team ' + selectedTeam + '</h1>';
     }
-    return '<h1>Select team by search</h1>';
+    return '<h1>Select a team</h1>';
 }
 
 function getSelectedTeam() {
