@@ -101,6 +101,7 @@ function getTeamProfileItems() {
                 layout: {
                     type: 'vbox'
                 },
+                hidden: true,
                 items: [{
                     xtype: 'panel',
                     border: false,
@@ -108,9 +109,27 @@ function getTeamProfileItems() {
                     width: 350,
                     margin: 10
                 }, {
-                    xtype: 'filefield',
-                    buttonOnly: true,
-                    margin: '0 0 0 100'
+                	xtype: 'form',
+                	items: [{
+                		xtype: 'filefield',
+                        name: 'photo',
+                        buttonText: 'Select Picture'
+                	}],
+                	buttons:  [{
+                		text: 'Upload',
+                		handler: function() {
+                			var form = this.up('form').getForm();
+                			if (form.isValid()) {
+                				form.submit({
+                					url: '', // TODO
+                					waitMsg: 'Uploading...',
+                					success: function(fp, o) {
+                						Ext.Msg.alert('Success', o.result.file + 'has been uploaded.');
+                					}
+                				});
+                			}
+                		}
+                	}]
                 }]
             }]
         }, {
