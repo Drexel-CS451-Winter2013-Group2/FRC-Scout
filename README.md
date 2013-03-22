@@ -7,12 +7,12 @@ This program is a term project for [Drexel University](http://drexel.edu/)'s [CS
 
 
 Team Members (CS451 Winter 2013 - Group 2)
-======
-Keith Horrocks (@KeithJH)
-Kristian Calhoun (@kristiancalhoun)
-Hannah Pinkos (@hpinkos)
-Jirakit Songprasit (@jirakit)
-Ryan Hersh (@RyanHersh)
+=========
+* Keith Horrocks (@KeithJH)
+* Kristian Calhoun (@kristiancalhoun)
+* Hannah Pinkos (@hpinkos)
+* Jirakit Songprasit (@jirakit)
+* Ryan Hersh (@RyanHersh)
 
 
 Running The Application
@@ -22,11 +22,13 @@ ws81.cs.drexel.edu:4451/frcscout. By pointing a browser to this
 location you will be placed at the login screen for the application.
 The test users and passwords are as follows:
 
+<pre>
 test_admin@email.com    frctest
 test_scout@email.com    frctest
 test_team@email.com     frctest
+</pre>
 
-Theses users cover the roles of admin, scout, and team member respectively.
+These users cover the roles of admin, scout, and team member respectively.
 
 The application can be tested against the most recent version of the 
 Acceptance Test Plan, which is located in the `Documentation` folder of the
