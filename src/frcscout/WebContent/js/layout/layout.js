@@ -17,16 +17,15 @@ function getToolbarLinks(){
     return [{
         xtype: 'panel',
         html: '<h1>FRC Scout</h1>',
-        baseCls: 'lay-title',
-        height: 70
+        baseCls: 'lay-title'
     }, {
         layout: {
             type: 'hbox',
-            align: 'stretch'
+            align: 'stretch',
         },
         defaults: {
             baseCls: 'lay-toolbar',
-            padding: 4
+            padding: '4 10 4 10'
         },
         height: 25,
         items: [{
@@ -43,6 +42,7 @@ function getToolbarLinks(){
         overflowX: 'auto',
         overflowY: 'auto',
         items: getContentItems(),
-        flex: 1
+        flex: 1,
+        margin: 5
     }];
 }

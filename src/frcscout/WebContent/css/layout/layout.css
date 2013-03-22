@@ -1,7 +1,18 @@
-.lay-title * {
+.lay-title h1 {
     font-size: 35;
+    color: #6895FF;
+    padding: 10px;
 }
 
 .lay-toolbar {
     background: #6895FF;
 }
+
+.bold {
+	font-weight: bold;
+}
+
+.italicized {
+	font-style: italic;
+}
+
