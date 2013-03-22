@@ -74,31 +74,6 @@ INSERT INTO `game` VALUES (1,'Ultimate Ascent');
 UNLOCK TABLES;
 
 --
--- Table structure for table `match`
---
-
-DROP TABLE IF EXISTS `match`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `match` (
-  `match_number` int(11) NOT NULL,
-  `event_id` int(11) NOT NULL,
-  PRIMARY KEY (`match_number`,`event_id`),
-  KEY `FK_eventid_idx` (`event_id`),
-  CONSTRAINT `FK_eventid` FOREIGN KEY (`event_id`) REFERENCES `events` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `match`
---
-
-LOCK TABLES `match` WRITE;
-/*!40000 ALTER TABLE `match` DISABLE KEYS */;
-/*!40000 ALTER TABLE `match` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `match_record_2013`
 --
 
@@ -135,7 +110,6 @@ CREATE TABLE `match_record_2013` (
   KEY `FK_matchid_idx` (`match_number`),
   CONSTRAINT `FK_enteruser` FOREIGN KEY (`user`) REFERENCES `users` (`email`) ON DELETE NO ACTION ON UPDATE CASCADE,
   CONSTRAINT `FK_event` FOREIGN KEY (`event_id`) REFERENCES `events` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK_matchid` FOREIGN KEY (`match_number`) REFERENCES `match` (`match_number`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_teamid` FOREIGN KEY (`team_id`) REFERENCES `team` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -261,4 +235,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-03-21 22:46:55
+-- Dump completed on 2013-03-22 13:27:19

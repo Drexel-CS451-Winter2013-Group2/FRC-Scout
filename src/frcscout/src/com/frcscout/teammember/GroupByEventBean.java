@@ -57,7 +57,7 @@ public class GroupByEventBean {
         JSONArray json = new JSONArray();
         try {
             conn = dbconn.getConnection();
-            st = conn.prepareStatement("SELECT * FROM `match` where event_id = ?");
+            st = conn.prepareStatement("SELECT match_number FROM match_record_2013 where event_id = ? group by match_number");
             st.setInt(1, this.getSelectedEvent());
             rs = st.executeQuery();
             while (rs.next()) {
