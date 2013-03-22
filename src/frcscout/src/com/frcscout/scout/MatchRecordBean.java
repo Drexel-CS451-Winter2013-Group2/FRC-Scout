@@ -232,34 +232,33 @@ public class MatchRecordBean {
                 }
                 insertMatch(conn, this.eventId, this.matchId);
                 q = "UPDATE match_record_2013 SET " +
-                        "user = ?, team_id = ?, match_number = ?, color = ?, " +
+                        "team_id = ?, match_number = ?, color = ?, " +
                         "auton_top = ?, auton_middle = ?, auton_bottom = ?, " +
                         "teleop_top = ?, teleop_middle = ?, teleop_bottom = ?, " +
                         "teleop_pyramid = ?, pyramid_level = ?, play_style = ?, " +
                         "confidence = ?, ability = ?, fouls = ?, " +
                         "technical_fouls = ?, comments = ?, path = ?, event_id = ? WHERE id = ?";
                 st = conn.prepareStatement(q);
-                st.setString(1, this.user);
-                st.setInt(2, this.teamId);
-                st.setInt(3, this.matchId);
-                st.setString(4, this.color);
-                st.setInt(5, this.autonTop);
-                st.setInt(6, this.autonMiddle);
-                st.setInt(7, this.autonBottom);
-                st.setInt(8, this.teleopTop);
-                st.setInt(9, this.teleopMiddle);
-                st.setInt(10, this.teleopBottom);
-                st.setInt(11, this.teleopPyramid);
-                st.setInt(12, this.pyramidLevel);
-                st.setString(13, this.playStyle);
-                st.setInt(14, this.confidence);
-                st.setInt(15, this.ability);
-                st.setBoolean(16, this.fouls);
-                st.setBoolean(17, this.technicalFouls);
-                st.setString(18, this.comments);
-                st.setString(19, this.path); //TODO path
-                st.setInt(20, this.eventId);
-                st.setInt(21, this.id.intValue());
+                st.setInt(1, this.teamId);
+                st.setInt(2, this.matchId);
+                st.setString(3, this.color);
+                st.setInt(4, this.autonTop);
+                st.setInt(5, this.autonMiddle);
+                st.setInt(6, this.autonBottom);
+                st.setInt(7, this.teleopTop);
+                st.setInt(8, this.teleopMiddle);
+                st.setInt(9, this.teleopBottom);
+                st.setInt(10, this.teleopPyramid);
+                st.setInt(11, this.pyramidLevel);
+                st.setString(12, this.playStyle);
+                st.setInt(13, this.confidence);
+                st.setInt(14, this.ability);
+                st.setBoolean(15, this.fouls);
+                st.setBoolean(16, this.technicalFouls);
+                st.setString(17, this.comments);
+                st.setString(18, this.path); //TODO path
+                st.setInt(19, this.eventId);
+                st.setInt(20, this.id.intValue());
                 
                 st.executeUpdate();
                 deleteMatch(conn, oldEventId, oldMatchId);
@@ -340,7 +339,7 @@ public class MatchRecordBean {
         JSONArray json = new JSONArray();
         try {
             conn = dbconn.getConnection();
-            st = conn.prepareStatement("SELECT e.name, m.* FROM match_record_2013 m, events e");
+            st = conn.prepareStatement("SELECT e.name, m.* FROM match_record_2013 m, events e WHERE e.id = m.event_id");
             rs = st.executeQuery();
             while (rs.next()) {
                 JSONObject o = new JSONObject();
