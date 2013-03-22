@@ -23,11 +23,6 @@ values (341, 'Miss Daisy', 'Ambler, PA'),
 (2590, 'Nemesis', 'Robbinsville, NJ'),
 (3123, 'Wildcogs', 'Pottstown, PA');
 
-insert into `match` (match_number, event_id)
-values (1, 4),
-(2, 4), 
-(5, 4);
-
 INSERT INTO match_record_2013 (user, event_id, match_number, team_id,
 color, auton_top, auton_middle, auton_bottom, teleop_top, teleop_middle,
 teleop_bottom, teleop_pyramid, pyramid_level, play_style, confidence,
