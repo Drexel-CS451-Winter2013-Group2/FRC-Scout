@@ -18,7 +18,7 @@ Team Members (CS451 Winter 2013 - Group 2)
 Running The Application
 ===================
 The FRC Scout software is currently running at
-ws81.cs.drexel.edu:4451/frcscout. By pointing a browser to this
+[ws81.cs.drexel.edu:4451/frcscout](http://ws81.cs.drexel.edu:4451/frcscout/). By pointing a browser to this
 location you will be placed at the login screen for the application.
 The test users and passwords are as follows:
 
