@@ -141,7 +141,7 @@ function getOverviewItems() {
                 { header: 'Team #',  dataIndex: 'id', flex: 1},
                 { header: 'Total Points', dataIndex: 'total_points'},
                 { header: 'Auton. Points', dataIndex: 'autonomous' },
-                { header: 'Disc Points', dataIndex: 'teleop'},
+                { header: 'Teleop Points', dataIndex: 'teleop'},
                 { header: 'Climb Points', dataIndex: 'climb'},
             ],
             height: 400,
