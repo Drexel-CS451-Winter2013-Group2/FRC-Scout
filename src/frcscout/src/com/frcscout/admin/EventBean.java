@@ -61,6 +61,7 @@ public class EventBean {
                         this.endDate = rs.getDate("end_date").toString();
                     }
                 } else {
+ 
                     System.out.println("event id " + id.toString() + " not found");
                 }
             } catch (SQLException e) {
